@@ -1,0 +1,153 @@
+---
+title: "LAB 1 Bioinformatics"
+date: "`r Sys.Date()`"
+author: 
+  - Hugo Morvan
+  - William Wiik
+output:
+  pdf_document:
+    latex_engine: xelatex
+    fig_caption: yes
+    number_sections: yes
+  html_document:
+    df_print: paged
+geometry: top=100pt,bottom=100pt,left=68pt,right=66pt
+header-includes:
+- \usepackage{float}
+- \usepackage{longtable}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{titling}
+- \renewcommand{\headrulewidth}{0pt}
+- \renewcommand{\and}{\\}
+- \pretitle{\centering\vspace{0cm}{732A96 Advanced Machine Learning \par}\vspace{5cm}\Huge\textbf}
+- \posttitle{\vspace{1cm}\large\textbf{}\par}
+- \preauthor{\centering\vspace{4cm}\normalsize}
+- \postauthor{\par\vspace{2cm}}
+- \predate{\centering{\normalsize STIMA \\
+  Department of Computer and Information Science \\ Linköpings universitet \par}}
+- \postdate{\par\vspace{0cm}}
+- \raggedbottom
+---
+
+
+<!-- page number pos -->
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
+
+<!-- no page nr on first page  -->
+\pagenumbering{gobble}
+
+<!-- Anger sidbrytning -->
+\clearpage
+
+<!-- creating the table of contents -->
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+<!-- new page -->
+\clearpage
+
+<!-- starting the count on 1 after the contents -->
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+```{r, include = FALSE,message=FALSE}
+
+# Q1 ###########################################################################
+set.seed(12345)
+
+library(ggplot2)
+library(dplyr)
+```
+
+
+# Question 1
+
+We consider a gene locus with two possible alleles (say $A$ and $a$) and a diploid population with
+$N$ individuals. Hence, there are 2$N$ alleles in the population. Let $p$ be the proportion of $A$s in
+the allele population and $q$ the population of as (of course $p$ + $q$ = 1). A population is said to
+be in Hardy-Weinberg equilibrium if the proportion of $AA$ homozygotes is $p^2$, aa homozygotes
+is $q^2$ and the proportion of heterozygotes ($Aa$) is $2pq$.
+
+
+<!-- alleles = gener -->
+<!-- mating = parning -->
+
+
+## Question 1.1
+
+Show that with random mating (i.e. both alleles of the o spring are just randomly, with proportions $p$ and $q$, drawn from the parental allele population) Hardy-Weinberg equilibrium is attained
+in the first generation. What is the proportion of $A$ and $a$ alleles in the offspring population?
+Hence, with random mating, can a population in Hardy-Weinberg equilibrium ever deviate from
+it?
+
+If the mating is random then all individuals inherits alleles indepnedently with probabilities $p$ and $q$ from
+each parent. Then:
+
+$$P(AA) = p\cdot p =p^2$$
+$$P(aa) = q\cdot q= q^2$$
+$$P(Aa) = (p \cdot q) + (p \cdot q) = 2pq$$
+
+<!-- ?? -->
+
+The population can not deviate from Hardy-Weinberg equilibrium unless factors such as mutation changes the alleles.
+
+<!-- ?? -->
+
+```{r}
+
+
+```
+
+
+
+## Question 1.2
+
+We look at the MN blood group, it
+has two possible codominating (both contribute to heterozygotes) alleles $L^M$ (denoted $M$) and
+$L^N$ (denoted $N$). In a population of 1000 Americans of Caucasian descent the following genotype
+counts were observed, 357 individuals were $MM$, 485 were $MN$ and 158 were $NN$. Use a chisquare goodness of t test to test if the population is in Hardy-Weinberg equilibrium.
+
+
+```{r}
+
+MM <- 357
+MN <- 485
+NN <- 158
+
+population <- 1000
+
+# p = the proportion of Ms in the allele population 
+p <- (2 * MM + MN) / (2 * population)
+q <- 1 - p
+
+# Hardy-Weinberg equilibrium
+HW_MM <- p**2  * population
+HW_NN <- q**2  * population
+HW_MN <- q * p  * population * 2
+
+
+# chisq = sum[(Observed - Expected)^2 / (Expected)]
+##pchisq()
+
+
+```
+
+
+\newpage
+
+
+# Question 2
+
+In this exercise, you will use ...
+
+```{r}
+
+
+```
+
+
+
+
