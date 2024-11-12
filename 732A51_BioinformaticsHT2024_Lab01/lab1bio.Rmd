@@ -83,6 +83,8 @@ in the first generation. What is the proportion of $A$ and $a$ alleles in the of
 Hence, with random mating, can a population in Hardy-Weinberg equilibrium ever deviate from
 it?
 
+**Answer**
+
 If the mating is random then all individuals inherits alleles indepnedently with probabilities $p$ and $q$ from
 each parent. Then:
 
