@@ -1,0 +1,17 @@
+---
+title: "LAB 1 Bioinformatics"
+date: "`r Sys.Date()`"
+author: 
+  - Hugo Morvan
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r}
+set.seed(12345)
+
+library(ggplot2)
+library(dplyr)
+```
+

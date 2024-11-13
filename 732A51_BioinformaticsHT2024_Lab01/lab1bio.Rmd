@@ -85,7 +85,7 @@ it?
 
 **Answer**
 
-If the mating is random then all individuals inherits alleles indepnedently with probabilities $p$ and $q$ from
+If the mating is random then all individuals inherits alleles independently with probabilities $p$ and $q$ from
 each parent. Then:
 
 $$P(AA) = p\cdot p =p^2$$
