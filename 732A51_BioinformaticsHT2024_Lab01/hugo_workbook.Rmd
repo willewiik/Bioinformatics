@@ -15,3 +15,35 @@ library(ggplot2)
 library(dplyr)
 ```
 
+```{r 1.2}
+MM = 357
+NN = 158
+MN = 485
+pop = 1000
+
+p = sqrt(MM/pop)
+q = sqrt(NN/pop)
+pq = (MN/pop)/2
+
+#assuming p is correct:
+qe = 1-p
+pqe_p = p*qe 
+
+chi_test_p = (q-qe)^2/qe + (pq-pqe_p)^2/pqe_p
+print(chi_test_p)
+
+#assuming q is correct:
+pe = 1-q
+pqe_q = pe*q
+chi_test_q = (p-pe)^2/pe + (pq-pqe_q)^2/pqe_q
+print(chi_test_q)
+
+
+
+```
+
+
+```{r}
+
+```
+
