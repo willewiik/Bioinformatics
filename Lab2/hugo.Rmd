@@ -236,6 +236,35 @@ cat("Number of '*' symbols in true:", count_stars, "\n")
 
 ```
 
+```{r}
+
+count_aa <- function(file_path) {
+  amino_acids <- c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L",
+                   "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y", "\\*")
+  
+  file_content <- readLines(file_path)
+  file_text <- paste(file_content, collapse = " ")
+  
+  counts <- sapply(amino_acids, function(aa) {
+    str_count(file_text, aa)
+  })
+  
+  result_table <- data.frame(Amino_Acid = amino_acids,Count = counts,
+                             stringsAsFactors = FALSE)
+  return(result_table)
+}
+
+
+sim <- "transeq_sim.out"
+aa_count_sim <- count_aa(sim)
+
+tr <- "transeq_true.out"
+aa_count_tr <- count_aa(tr)
+
+knitr::kable(aa_count_sim, format = "markdown", col.names = c("Amino Acid", "Count"))
+
+knitr::kable(aa_count_tr, format = "markdown", col.names = c("Amino Acid", "Count"))
+```
 
 
 
