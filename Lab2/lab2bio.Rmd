@@ -386,7 +386,7 @@ Tree building functions tested : fastme.bal, bionj, nj.
 
 Compare your inferred trees and also your simulated one. Apart from visualizing the trees one may calculate various indices related to them and distances between the trees. Explore what indices and metrics the `ape`, `distory`, `phangorn`, `phyloTop`, `TotalCopheneticIndex` or `treespace` R packages offer, choose some and report the results in a meaningful way. You might have to save your tree to drive and then read in it using e.g. ape’s tree reading functionality.
 
-```{r 3-2, eval=FALSE}
+```{r 3-2}
 ape::comparePhylo(phyl1, phyl2)
 #Metrics : 
 branching.times(phyl1)
@@ -402,29 +402,60 @@ plot(a)
 b = compute.brtime(phyl1)          #Compute and Set Branching Times
 plot(b)    
 
+a = compute.brlen(phyl2)           #Branch Lengths Computation
+plot(a)
+b = compute.brtime(phyl2)          #Compute and Set Branching Times
+plot(b)    
+
 heatmap(cophenetic.phylo(phyl1))
 heatmap(cophenetic.phylo(phyl2))
 
-corBlomberg             #Blomberg et al.'s Correlation Structure
-corBrownian             #Brownian Correlation Structure
-corClasses              #Phylogenetic Correlation Structures
-corGrafen               #Grafen's (1989) Correlation Structure
-corMartins              #Martins's (1997) Correlation Structure
-corPagel                #Pagel's "lambda" Correlation Structure
-corphylo                #Correlations among Multiple Traits with Phylogenetic Signal
-correlogram.formula     #Phylogenetic Correlogram
-
-dist.topo(phyl1, phyl2) #needs similar names
-
-gammaStat               #Gamma-Statistic of Pybus and Harvey, requires ultrametric trees
-
-
-root                    #Roots Phylogenetic Trees
+# corBlomberg             #Blomberg et al.'s Correlation Structure
+# corBrownian             #Brownian Correlation Structure
+# corClasses              #Phylogenetic Correlation Structures
+# corGrafen               #Grafen's (1989) Correlation Structure
+# corMartins              #Martins's (1997) Correlation Structure
+# corPagel                #Pagel's "lambda" Correlation Structure
+# corphylo                #Correlations among Multiple Traits with Phylogenetic Signal
+# correlogram.formula     #Phylogenetic Correlogram
+# 
+# dist.topo(phyl1, phyl2) #needs similar leaf names
+# 
+# gammaStat               #Gamma-Statistic of Pybus and Harvey, requires ultrametric trees
+# 
+# root                    #Roots Phylogenetic Trees
 
 summary.phylo(phyl1)
 summary.phylo(phyl2)
 ```
 
+True data phylogenetic tree Branch lengths stats:
+
+mean: 0.05191795 , variance: 0.001511728 
+
+Min.: 0.001377696
+
+1st Qu.: 0.014389981 
+
+Median: 0.051113051
+
+3rd Qu.:  0.075027992
+
+Max.: 0.138188147
 
 
+Simulated data phylogenetic tree Branch lengths stats:
 
+mean: 0.2178854 , variance: 0.04231989 
+
+Min.: 0.0005453872 
+
+1st Qu.: 0.0027112159 
+
+Median: 0.3607140035 
+
+3rd Qu. : 0.4162849315  
+
+Max.: 0.4275080112 
+
+The simulated data phylogeneteic tree branch length has on average much longer branch lengths (0.05 vs 0.22), but with also much more variance (0.0015 vs 0.0423). This these results correlate with the obeservation from the heatmaps which shows that in the simulated data, no clade is close to any other, which makes sense since the data was randomly generated and should be i.i.d. 
