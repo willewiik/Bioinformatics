@@ -1,4 +1,4 @@
->seq_1
+>sim_JF806202
 gcgctattgc aagattttac ttcggtgtat gaagttccga gtcgataaag cctagtgata
 gacgcacagc gtttagcgta ctaaaactca ccaggtggat agcgtcgcaa gtgtgccgat
 ttaggccaag agcgccgaac tgagacctct ctctaggtcg ggccttcact cagatggccc
@@ -16,7 +16,7 @@ gtggtctagt gagagcttat gctagaaaaa cttgtgacat agtgcatgaa tggtatagct
 gagtatgact tccaaacggg aatcggaagc gactctgaca gtgttgctca gaaaaagaaa
 gactaattca cacgtgatgt agtttaaatc agacagattg cgtcacggct ataaattatt
 tttgttgtag gcgctgttgc atccttagta gaatacta
->seq_2
+>sim_HM161150
 taacatgaag cctcgtctag tgaaaacctg gtggcaaata aggagcggtt ttgcggtatt
 attcctaatg ccgattcggt tacgtataca caccagagat gatcttggcg ctcgaaccga
 attatgatga acagtattat cccattgtaa gtgtcggtat ttgcaagata gcgcaattga
@@ -63,7 +63,7 @@ gatacgagtt tcttccccag cacgaattta caacagatct gaacttacgg ctattggagt
 tatgaagcga aatacgaaaa aacgtcctac cgcaaaaggc gggggagtga aatttacaga
 acccaaatat cagcaatcta tatgagtgaa ctttaccgtc cttattacca attgttagaa
 ttaattgat
->seq_3
+>sim_FJ356743
 ataaaattga acagtaagac tattggggcc agcccagaaa ctatcatgtc gttagactca
 actggtttat cgaatacatg tttggcaagc tcggggatcc ggacaacagt gcacaacccg
 ccacatgatg agtcggttat gtctagtccc tagaaaaggc ttccacgaga gcgtcaacag
@@ -113,7 +113,7 @@ gcagtttgac gggagcgttt gcggtgcaac ttattggaat aaaatttttt aaagctaaaa
 ggatctagcg tttaggacgg gatatatatc gttcaaaatt ttcttaaaag ggaagatcaa
 agccatcacg aattttactg gaatccatcg gaagtagcag gtggaaaatg caaaagagaa
 acgcaatgta t
->seq_4
+>sim_JF806205
 aattggctga taatgagccc gacaacgata cgatgttgag cataattata tatatcgagc
 cgatgtataa ccggtttaag gtcatgccat gcaccagtaa gcggtggccg tgtatctatt
 gtataaagac cagatataaa ttttgttatg ctattagtaa gtccgggctc tagcgctccg
@@ -131,7 +131,7 @@ gtgtaagcag ttgaccggtt aaatatttta tgcatactaa cagaccgcct cattggccgc
 acttaggtgt gttggtttat acgcttttct ctgttatgat gtcttgcatc cctaaggcaa
 taatatcata catacttgct actcttaagg aaccgagtag cggatgcatt gacccctata
 ttatcagtta tactgtagga tataacaact cctgtactgc catatcggt
->seq_5
+>sim_JQ073190
 ctctcgatcg tgatctgtcc gcgctagaaa taagatattt agcgattagt ttcttggaca
 gtattctagt tagctggatt tacagagaag taactgcttt gagatatcgt ccttcggtgt
 taaaaccaag ttattggaga ccacaaaaaa tatcgcgact tatcgcaacc ccacaaggag
@@ -157,7 +157,7 @@ tatatggcat aaattgaatc aaaagcatgc gacatacggg tgccttatat ctatagttga
 gccgtacttg cgtcgagcaa ttaagactgc atttatcgaa agttacagtg ttcactcgaa
 cttcacgtgc agagcaacaa cgaggaccct gaaagtactc ccttaaaccg aaaagagtga
 cctagatgct cttgatccat tcacaggcgc aatt
->seq_6
+>sim_GU457971
 agggtggatg gaagaagcac gtttcatttg gggcgcccaa ttataatacc atgggtactg
 aaaaaaacca gggttccgaa tttatgatac ccataggaac gcggattggc gacctcagta
 agcagaccta gggtatagac gtgaaactgc cgttgatctt gagacttgtg aataaaagta
@@ -177,7 +177,7 @@ aacggagtat cgaagtataa gccgaaaatt aataggtcat cgtattaaca atatcaagga
 atacactaca gctcagagat caacttattc atgcctgatg tgatgggcat ataccgcgtt
 ggaggaaaaa attctcataa aattgggttc acgagcggct ctagaggaga atggataaaa
 gatcccccct t
->seq_7
+>sim_FJ356741
 tacacaataa gcaataaagg cggcctgggc tgtcgctacc tgatgaatca aaaccaggag
 aattctcaat tatattactt agttaccgcg aaaaagaatc accggtgcca gtagtggcgg
 agatctctaa tcacccgaat agttaaaaat aaattctatc gaaactaacc tcctactact
@@ -227,7 +227,7 @@ aacacagaaa accttaatgg tcccactggg tatcgtaaag ctcacaacta aagcgggcca
 aatcacgtga tggacacaat taaggcaagc tctattatac atttcatatc taatccaaca
 tgtctctata atcttcctac ccatacctaa tcacagctat atacgcttag agaaaagccg
 ggtggaaggg a
->seq_8
+>sim_JF806207
 ggtgggggaa caaactgtta gacgtagttg agaactgacg cctgtcctat ttatgccact
 gtatatttta tacatcatag gctcgaagta acaggcacag cttgacggct gatgaacaaa
 caagtttgaa gcatgcttta agccattcga gattgcaagc attctatact ttgaggtaaa
@@ -245,7 +245,7 @@ cacgattaag cacaccgttt aatcaagagc acagaaaaat ggcctatgat ccgcctccgc
 gaggttctga aacaggcgac caacaataac ttcacgttaa gtcttaatag aggtctatgc
 tgagtttagt tgtaagtgtg cgaaataaac tagtacaaca agagtagttt ctagcgaaaa
 aatataaagg cccctttgac cgaagtctga cactatgaca gtcg
->seq_9
+>sim_JF806210
 ttaaggtata tgttggcaac tttacggtta ttgaaaactt gcaatgaaaa gaggtgctga
 atgaagtcta tatatggttt ggtaggcagt gtaattgtgt aatgagcaag gcccgtgcat
 cgcaccatta tacctaagca atctctttac gaagtaatgg gtcttatgtt atgtcttgac
@@ -264,7 +264,7 @@ atgaattagg cgggtccagg gagttgacta cacgctcgtc gaatagacat gaacttttgt
 caaacctcaa gctaacaatt aggtgataac catatgacaa cgcagtcttt cgacactatt
 acagatcgcc tgtggctagt ggagccacag ttttaagctg ttaaattgct ataattatgt
 taacattcat catcacacaa cttt
->seq_10
+>sim_AY662592
 attactaagg tcgtttgttt atcaaggcat tgtataaaga atcgagaaat aaacggttcg
 acttcagaat cagtctaacg ggttggagta ccaccgtagg acgttttgac taagccgaat
 acagtaagtc tcctactgca taggctaagt ctgccggcac acaactcgat cgggttggaa
@@ -314,7 +314,7 @@ tggctctcct attaaaagaa ccccgttacg agctataaaa aagatatgat attatgtggc
 tgaagctgaa caagtccagg gcaaaacata attcaacctg attaaataaa taagtgacgc
 ttgatgaggg ataatcagcg cacgcataac ttgtcgcatc gtaatagcta gccagaaatg
 ggttaagcaa tcatcgacta gaactgcatc agtatcctag
->seq_11
+>sim_AY662591
 aagacattaa atgtaaatga ataccctcat tgacaaacgt gagcgttact cagcgagctt
 agcctaacga acatttgacg gcgtgatact gttttttcgc taacgcagaa gaacgatgtg
 cgcttatatc aggaaccttt aagcgatcaa ataagaatcc catgagcttt acccatgacc
@@ -362,7 +362,7 @@ tactagcgac cagcactgat aagagtgtgc tgcgttagcc aacaaaactg aggcatgtag
 acgcaatcac tggcgattaa tactgttata tgaagttgaa ggttgtagga atctcctcgt
 attgggtagg cacctatctg tggatcaaag agcaaggact caattggacc tataataaaa
 tctcttcaca caaaaaaagg gtcagatctc aagccagttt agtttgttaa tcttta
->seq_12
+>sim_FJ356748
 aatgatgaca tgtccgaagg tatacctttg gagctttcaa tagtgtagaa tgtaagttct
 acactaggca caccatcgta gtaggacctc aatgaaactg tcggataagg gtgaggctga
 tcctatgact ccagcactaa tattaacccg caccgaagga ggcggaacca agagggctag
@@ -412,7 +412,7 @@ cgttaaaagt attaactttt aaacacgaaa taccacaccc tttttgcatc ttaagtgctt
 ccttttacta atccccgtaa aacacgctga gcgcataatt atagtgacat ctattgctga
 gctaacttat cgatcagtct attgcatgag gtattagact attatgccaa agtgtttgaa
 aatacagggt aacag
->seq_13
+>sim_JN112660
 ctttgataac gacaaaaatt agctgtgaaa ctcgagagtt taaccggcga accttggagt
 gtatgtttca gttggaagct ctttgattgt gctgttgtca gggcttgggg aagttaattt
 atgtttgagc gttacctgta ataaatactt acacacagcc gtcagttggt tagcgcgagt
@@ -459,7 +459,7 @@ tgtgatgtat tttacgtatt aaaccatgac gtataaaacc actaaaacgt gccagcgttg
 gacttcttct ctcaaagctt aacctccacg ttccttatca gtccgtggcg atctggagtc
 tgatgagcaa tggctgagct tattgatagg actgagttga atctgcagga caaggttcgt
 gggcaaaaca cgacatgcta acttaagcac aaaattcaag ctggagac
->seq_14
+>sim_AY662594
 cggatagctc tctgcccgga atacaaacaa tcgagttacc acgcactaag gcctccgata
 tgctaacaga aaaggcgtca tagatagcca aaatcattcc aaataacaat ttagctggta
 ggagccccct gtaaatcatg taaaatcaag cagatgacag gagagctgaa gtacatatgg
@@ -508,7 +508,7 @@ gaatgtagca atatgagagg gctgcaacct ttgagtcagc gtcttactcg ctaacgccga
 gcgacctgat tacccccaga agtttttgga gacggattac tacaatcccc ttaactacat
 gcatgctttt aaggttccca caaaataaac gactaataat ctgcgcttat catgttgtca
 actcgaggtg atttcga
->seq_15
+>sim_JN112661
 attcttaata atcttagccg ggtttgcgcc atactcctgg ggacgaattt gctctttatg
 gtaacctcca attggattga acacgtttag tcacgctact agtaagaaca tactctctgt
 ttaaattaaa acaagtgact gacgaagcaa acccaatata agttatgggg gtagtcctag
@@ -555,7 +555,7 @@ cgcacttact cattagacaa ccttggctac ttgatagaaa acatgttcgt agcgaatcat
 aatgttttga taacactttt acctacgacg tttagtgcac attacagaag agttgtgcag
 atgtatacaa gaggaaaagc actcacatga aacaagtact gctcaagcag acaacgcaca
 tcttaaaact atggattgca ggttaaaagc cccaattgtt ggattaga
->seq_16
+>sim_HQ876437
 acagtaaact gtggagggga tctgttatgg tagatgtcac cgttcggatt agcgggaagt
 gacaagaaac tccggctaag gggctaggtt gtaacttaaa cgatactttt ctcacgccca
 acactaaata aagagctgcc tctattctct caaaagctgc aaccgcactg cacgagtgtc
@@ -573,7 +573,7 @@ tttccgtcgg tggcaagagt gaaataaaga gcgaacacct aagtcgattg tgagaattga
 agcgcggcta agtagcacgc gcaaggtagt ccggaaaaac gactatcggt gataccggat
 ttgctaacgc tgttgcctct taatatccga aagccaacat cgattcctgt agatgataat
 aacgtatcag tgaaagatga accaacgtaa gaaaattagt ttat
->seq_17
+>sim_HQ876434
 cggactttta gccataaagg tcctgagcac agcacagaaa acacttactg gtatgcatag
 aggcattatg acgaactaga gtgaaaaggc taactacaac gacactccct aaggcgcacc
 atgcataata ttggtttcag gcatcgagcg cactaaaccg gagggtccta tcattgttta
@@ -591,7 +591,7 @@ gtcgcaagcc gtgacactga tccagcatgc actgctgctt ctacaaagtt ggtagaagcg
 agcacttctg gaaagtgccc tagcatgata aacaacaagg tgaatgttgt ccgattttgg
 taatattttt aaggatatct gcaactagca cggctgcact aaagatagca aaataaatga
 ggttcaggct gctcaattac gaatccagcg cggtaagtcg
->seq_18
+>sim_AY662590
 ctatttagcg cagtcgcgtg cgttctcgcc tattaatatc cagtaacttc aaagtggcac
 atccagggat gagtctcaac attcttttat aaccaaaccg atggaaaata tcctcgcaaa
 gtccctaagg ctgacgacta gatttcagta gaatgcttat ctacatctag cggagtgtat
@@ -640,7 +640,7 @@ gatttggagc gcctcgagta tggatgtact catgtcatag ggactaaagg cagatataga
 aggtcattca cacacatctc tcatgtacgg actgtgctag aagtgtattt agtattcaac
 agatgacggc ttgattcaat cgtttttgtg gacatgtccg ccctcagaaa accacgggtt
 gataa
->seq_19
+>sim_FJ356740
 gttaaggagc gtgggaagcc aaggtctaga gaacttgaga tatagcgatg gtcaatcaac
 taagaacgcg ttaggcctga taagcgatat tatttctcaa ctcgcccttc gccgcgggac
 agaacgtaaa cacaggaaga gttcgaagaa taacaatgtg aaggaatggc aatagcaacg
@@ -689,7 +689,7 @@ tgggaagacc ccttacttta atctaaatca taacctatta attaacccga ttagacaacg
 gcgtgaattg aaacaacgtc tatctctgcg aagtatgcgc gggggcaacg aagccaaatc
 gctaacaggt acctataatg cctcagagta tatacagtca ttaacttggc tacagtgcca
 agtggacacg atcgctgtct gtgtggtag
->seq_20
+>sim_JF806214
 taccggacaa taattaacgc cgcacccatg tggtctagtc gtcccgtaac agcaagacgt
 tcattaggca attgcgagct ttaattcttc tgaataaggc agcaggaccg gataaaggct
 agtatcccgt attatacttt gtcccgacat agatagtgtg gtaggcgatg ctattttaca
@@ -707,7 +707,7 @@ gatggtcgtc cgtttataaa taaactcata tgcacaaata gtttgtcgcc ttatcggcac
 agacctcagg cagatggact agctgtttaa atgctaggcc atctggtctt aaacacaaat
 cggccgatcg cgcaagtata ttagggtagg gctatcgcgt aacttaaaat gtaatcatac
 atctataaag gagatacaac tgcaactacc ctagccaaaa tccaacct
->seq_21
+>sim_JQ073188
 atcacagcac taaggatgct ataaccgtgt ataaagaaca aagggtaagt gaaaacgagt
 gcgccaacac gtccaagctt tcaatatgga ttatgaggac cgtcatctaa gcgggttcta
 ggatacagat tattgcctaa gtcaaggttg ccaagtgtca acgtctagcg gtcacccata
@@ -733,7 +733,7 @@ cgaatgagga ggcgcgggac atagacagta gggctgtagg tagccagctc atgcctccgt
 gcctaacatg gcatatattt ccatggaaac tcagtaagat agttgtgcga tagtcctgca
 aggggaaata tccgtcgcat tctagaatga ggttaggggg agcagaagac gtaagaatgc
 gacagcagcc cgggttaaaa cctgtcgttg gg
->seq_22
+>sim_FJ356749
 caagcaaaac ggctagctga cctacctaag gcaataataa aaaatctaat ttttgataat
 ttcatttcca tgtataccgt ggtgagtagc cgggatagtt tggatccaaa attatcatac
 tagctttatc acggctttcc ctacgacgct ggaggataca cagctttcgc agtttacggc
@@ -783,7 +783,7 @@ ttccaggact gtacttaagt atgtacatag ctggctaagc agtcaatccg atacaagcta
 atagattaca ttaaagaata ataggtgttg gaaaatggaa gtgcgcgtca gaattcgttt
 cttggttatg gcacgttacc aaagcctttc ccattggaaa atacggctaa gctttgatcg
 aagcaaaccg acc
->seq_23
+>sim_JQ073189
 cagcatggta tctaaaatta actaaacaac agcaaaccgt cgatgtgtcc aaaaccgaag
 caaagtggag tggatatgat cggtgagatg tcgctatctt gaattgtgac gcaacaatct
 gccatacaac ttctgaatgt ttgtcgaaat tgggaagata cgaacatatt cagagcgaga
@@ -809,7 +809,7 @@ atacaaacct taagtagcta taccgggcat caggtttaaa tgtctacgat ccctaagtta
 tcacaccaat gagagaagac caagatggta gacagaatct acgaggataa aatgctgcgg
 ggcgagattt agatttccag ataggagcac caaattttgt ttgtgtaacc tattgcttta
 cgagaag
->seq_24
+>sim_JF806216
 gtggacatag agagatcagg tatgtgttag ccgttaatga ctagccttcg tgggcttcgt
 tggttatcgg ctagctacag cgtaatattt gaaattcaga tagagttaaa gacatgtccg
 atacaattgt tcgaaaggtg aagtctccgg cagcggtgac cgaccggcca agtgcagatc
@@ -827,7 +827,7 @@ caaaccctga gtaaagcata cataacgaat gtcgagcacg taatatgaac cgcggaaatc
 ttgaagtaag aagggaaatt ataagggggg gagatagcct tgatttggag tcccggatgt
 agcgtcgaca tttcagagtt tagcttcaac gttcaaagtt tttgctattt ggctcgggtc
 ggccagtatc aagcttaact ccagctgtac agcggtggcc
->seq_25
+>sim_AY662598
 ttttctgcta tagcaagcaa gatcgattag catgatacat cctaacctta ataaggcgat
 atctacgcta ctatcggatt atgcctgatg ctggagataa tagtcatttc gcgacaccta
 agctggtagg aagcttatgt cttcgtacag tgcttcgact aatccacaga tcaaaaacac
@@ -876,7 +876,7 @@ ctgttaacct gatgtcctca atcaaagggt tccagtcgaa gtataaaact tttagctggt
 cgcgctcgat gattcgggcg gggaatataa caagatattc agacagttag caaagtctat
 cgagaacgag aaggagttcc gcgagagacc gtttgtatat gatgaccagt caccccacag
 ggtgttcgag caggatc
->seq_26
+>sim_JN112653
 ctggagctgg gtgaaagacc agtacatgtc ggcacattct caaaagattt ggcaaagtga
 gcgttatggc gttgccttgt ggtttttata tgagacagcc gagtttttgg tgtacatgtt
 gtaattacat ggtaagggta tacgttggaa gcaattcaaa tatctagtac catgctgttg
@@ -919,7 +919,7 @@ tgcaaacgga gtccattcaa tatgtcagtg tacggaataa acccgaacgc atatatggtg
 tgatcaactt catttgaaag gcccgcacgt ggtggacgca acctttagtc agctgtagga
 cgaggcggtt actgcacttc tacttgcata attggcgctt tccaaacggc gaaaatgccg
 ctaggcatag ggcgtccgaa aatcttggtt ccgatagatt acggtc
->seq_27
+>sim_JF806204
 gggcagacca cacgagcaaa catgtccatc ctcggttcga taattcgaga gggataagat
 ttagggtatt atagcacgtg atcaggttag aacaaaccta cgtgtctaaa gtagtaaagt
 agcttaaact ggacacatga aataccggga gaatggagct cagatgcatt gtatgtgaca
@@ -937,7 +937,7 @@ caccaacaca cagccccttt tacctgggta aaaactgcag ctattgagta gagaatacgt
 cacatacatg cccaagaaag ttgaaggccg gccttcgtgt gaacacatta ttttctcctt
 cacttataag ggcgaccaac atgcaatcgt atgtggattg ggcggtaaaa aaatgttgct
 ctcataccac gtacattaaa agcccaaatg taatttaaga tagaa
->seq_28
+>sim_FJ356747
 ctattttttc tacctccgtt aagggtttaa acaagacgtt ggcaaaaaaa aggagtcacg
 caaggaacga aaacccatcc tgccctggcg tataaaacat atcatggaat atgttcaaat
 gtggccgttt cagtaggata gataaaagac ggtacccccg gcggaattgg ttgatgagga
@@ -987,7 +987,7 @@ cattcagagg aatgtgtata gaagatctct aaagtccaaa attcaagaag tcatactaaa
 atataattta acggtagctc atcgacgtct ggaagtcgct ggccaggcta gcagctctct
 aaaacacacg gagtgtgtcg aagcaaaaat catttaaaca gctaagcagt ttacaataaa
 tgaatgtaaa g
->seq_29
+>sim_FJ356744
 ctagatattc acaatttagc ctgtgcaaac tatcctactc ctgtgccacc ttacggtatt
 caaatagtag agaatgcgta tctcattcta tggggagcag aacaatatcg ttcagtagga
 ccagtagcag gatgaaacca acgtatatgg ctgatgcctt ccagcatatc gcagcagctg
@@ -1037,7 +1037,7 @@ gcataggctg aatattgttc tagctaacac tatggccgcg catgacgtaa tcttcgtgag
 gattaccggt ccgagtgtac caaaggtcat taggcaagtc actgatgcga taacgcgtac
 tgtactaagt gtagaaaaac tcatgagtta attggagaaa gaccaggtgc gtcaacatat
 ttactccggc a
->seq_30
+>sim_HQ876440
 gacgaaaacg tcgtactcag caacgttaga atgtgcgact gctgaacgcg cataacaatc
 atcctatagt gatccttgtt cgatggctta acaatagtac aattaggtct tggagataca
 cgtctttgca aataagaaag caaccaaaac gcatcttgcg aagcgtaaag tagcgctggc
@@ -1056,7 +1056,7 @@ gagaaattgt taaatcggta cgatgcgcgc ccggatccct aacaacatta ggtggagtca
 ttcacttgca cgacaaaaga tgatgtcgaa gtcggcagca atcccagtac taatttttct
 atgttctgtt atcttgagtg tacctgctac cctgatatat atgggacagt gagaaacacg
 tcccctataa ccgcgtgctg cacatacacg aacaggggca
->seq_31
+>sim_JN112651
 atcttaatag cacgtcggac catctgaagt cggttaagat aactgccaag cagaaaatgt
 ataatcaggg cggcgcggcg aaagcggaaa gcagggtcac atcacgtgac acggttaaaa
 ctcacgagtc attcttcttt tatgaaggta aatgcaacta ctggaaaaga aactaatcct
@@ -1103,7 +1103,7 @@ cataaaaata tctacaaatt agatgtttgt aaccatagcc taaacgctag caacttcaaa
 ggtaattaaa ctgtagatat attaccgggt tccgtctacg cctatattaa cacgttacaa
 cagatcatat aaaaaggaaa ctcctgttac cgcgactgaa gaaaggagat taggacagtt
 actgcgttgt taactcttta aagtacacgt aatctggc
->seq_32
+>sim_JF806215
 gtcagcagag tcgatacata tacgacaaaa gagagaaaaa taattgctca gcccggagag
 tgaaagggtt tgaattttga accaggtggt gacaatgttg gaatctgcac tctgaagtaa
 agtccggcgc ggacccttaa atatcacgag aacgataagg aacgatacgc gaagtcggcg
@@ -1121,7 +1121,7 @@ aaagaacatg tacaatccct cttgaacggg gcatatcacg atctaaatcg aatgtcgacg
 gacagatgcg aactccacca gtaagaagcc taaaaggtta cgggcgtgaa gattctaatc
 catgctcatt caaagagaaa tgttgtggga actagattcc taggagaaaa ttcgcgtcgg
 ttatacgaca aggatagcct ttactttatt cctgtatagg ttt
->seq_33
+>sim_JF806209
 ttgtagtatt tatgcccaga agagattgcg ggcgggtact tatgtataca cgaacccacc
 aggctactgg agaaagtgca atccacgaca cagccgacat gataaagtaa gtgcataaac
 acttattatt cagactttgc tgcacgtttg tttactatct agaacgagcc gctaatcaga
