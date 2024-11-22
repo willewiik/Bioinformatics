@@ -116,7 +116,7 @@ sim_sequences <- lapply(sequence_lengths, function(length) {
    rDNAbin(n = length, base.freq = true_base_composition)[[1]]
 })
 
-names(sim_sequences) <- paste0("artifical_",names(lizards_sequences))
+names(sim_sequences) <- paste0("sim_",names(lizards_sequences))
 
 sim_sequences <- structure(sim_sequences, class = "DNAbin")
 
@@ -218,7 +218,7 @@ calc_seq_stats(all_seq = true_sequences, index_seq = 1)
 ```
 
 ```{r}
-# Simulate lizard sequence 1 (artifical_JF806202)
+# Simulate lizard sequence 1 (sim_JF806202)
 calc_seq_stats(all_seq = sim_sequences, index_seq = 1)
 ```
 
@@ -261,7 +261,13 @@ process_protein_file <- function(file_path) {
 ```
 
 ```{r}
+
+# File from Ying Luo
+codon_and_ORF <- read.csv("codon_and_ORF.csv")
+
+
 # https://www.ebi.ac.uk/jdispatcher/st/emboss_transeq/summary?jobId=emboss_transeq-I20241120-223345-0023-59554073-p1m&js=pass
+# Codon start = Frame = 3 
 transeq_true <- process_protein_file("transeq_true.out")
 chars <- strsplit(transeq_true[1,2], NULL)[[1]] # JF806202
 char_table <- prop.table(table(chars))
@@ -301,13 +307,47 @@ can also look what `Biopython`, `BioPerl` offer, use the `Clustal` family of pro
 else of your choice).
 Choose a distance measure between sequences, calculate for each alignment the distances
 between all pairs of sequences. Then, plot heatmaps visualizing the distances. Comment on
-what you can observe
+what you can observe.
 
 ```{r}
+
+
+# if (!requireNamespace("msa", quietly = TRUE)) {
+#   install.packages("BiocManager")
+#   BiocManager::install("msa")
+# }
+
+library(seqinr)
+library(msa)
+
+# Calls the multiple sequence alignment algorithm ClustalW.
+clust_lizard_seqs <- msaClustalW("lizard_seqs.fasta", type = "dna")
+clust_sim_lizard_seqs <- msaClustalW("sim_lizard_seqs.fasta", type = "dna")
+
+# Convert MSA object to formats used in other sequence
+# type = "seqinr::alignment" because we want to use dist.alignment() later
+converted_lizard_seqs <- msaConvert(clust_lizard_seqs, type = "seqinr::alignment")
+converted_sim_lizard_seqs <- msaConvert(clust_sim_lizard_seqs, type = "seqinr::alignment")
+
+
+# Calculate pairwise distances using dist.alignment() from seqinr package
+dist_matrix_lizard_seqs <- as.matrix(dist.alignment(converted_lizard_seqs), matrix = "identity")
+dist_matrix_sim_lizard_seqs <- as.matrix(dist.alignment(converted_sim_lizard_seqs), matrix = "identity")
+
+
 
 ```
 
 
+```{r}
+heatmap(dist_matrix_lizard_seqs, main = "Distance between sequences (True lizard seq.)")
+```
+
+
+
+```{r}
+heatmap(dist_matrix_sim_lizard_seqs, main = "Distance between sequences (Simulated seq.)")
+```
 
 
 
