@@ -116,7 +116,7 @@ sim_sequences <- lapply(sequence_lengths, function(length) {
    rDNAbin(n = length, base.freq = true_base_composition)[[1]]
 })
 
-names(sim_sequences) <- paste0("seq_",1:33)
+names(sim_sequences) <- paste0("artifical_",names(lizards_sequences))
 
 sim_sequences <- structure(sim_sequences, class = "DNAbin")
 
@@ -171,11 +171,26 @@ sim_sequences <- read.FASTA("sim_lizard_seqs.fasta")
 
 calc_seq_stats <- function(all_seq, index_seq) {
   
- base <- base.freq(structure(all_seq[[index_seq]], class = "DNAbin"))
- GC_content <- base["g"] +  base["c"]
- AT_content <- 1 - GC_content
+
+ seq_DNAbin  <- structure(all_seq[[index_seq]], class = "DNAbin")
+ seq <- as.character(seq_DNAbin) # from raw to character
  
- base <- round(base, 3)
+ 
+ # How many g and c that are in the sequence
+ GC_content <- ((sum(seq == "g") + sum(seq == "c")) / length(seq)) 
+ 
+ # Base composition
+ base <- base.freq(seq_DNAbin) %>% round(3)
+ 
+ # CpG (How many c is followed by a g)
+ # seq[-length(seq)] removes the last element
+ # seq[-1] removes the first element
+ CpG <- sum(seq[-length(seq)] == "c" & seq[-1] == "g") / length(seq)
+ 
+ 
+ # ApT (How many a is followed by a t)
+ ApT <- sum(seq[-length(seq)] == "a" & seq[-1] == "t") / length(seq)
+ 
  
  
  print(paste0("Base composition for ", names(all_seq)[index_seq],
@@ -184,25 +199,26 @@ calc_seq_stats <- function(all_seq, index_seq) {
  print(paste0("GC content for ", names(all_seq)[index_seq],
               ": ",round(GC_content,3)))
  
- print(paste0("AT content for ", names(all_seq)[index_seq],
-              ": ",round(AT_content,3)))
+ print(paste0("CpG content for ", names(all_seq)[index_seq],
+              ": ",round(CpG,3)))
+ 
+  print(paste0("ApT content for ", names(all_seq)[index_seq],
+              ": ",round(ApT,3)))
  
 }
 
-# True lizard sequences
-calc_seq_stats(all_seq = true_sequences, index_seq = 1)
 
 
 
 ```
 
 ```{r}
-# True lizard sequence 1
+# True lizard sequence 1 (JF806202)
 calc_seq_stats(all_seq = true_sequences, index_seq = 1)
 ```
 
 ```{r}
-# Simulate lizard sequence 1
+# Simulate lizard sequence 1 (artifical_JF806202)
 calc_seq_stats(all_seq = sim_sequences, index_seq = 1)
 ```
 
