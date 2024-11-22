@@ -64,15 +64,10 @@ library(seqinr)
 
 # Question 1
 
-In this exercise you will perform statistical analysis of three nucleotide data sets. First download
-the sequences from GenBank and save them in a fasta le. For this use the provided R script,
-732A51_BioinformaticsHT2023_Lab02_GenBankGetCode.R. This is a dataset of the RAG1 gene
-sequences from 33 lizard species. You are encouraged to read in detail the references in the script
-as they indicate many useful tools. Explore the dataset using the tools provided by the `ape` and
-`seqinr` packages. Take note of the lengths of all the sequences and the base composition.
+In this exercise you will perform statistical analysis of three nucleotide data sets. First download the sequences from GenBank and save them in a fasta le. For this use the provided R script, `732A51_BioinformaticsHT2023_Lab02_GenBankGetCode.R`. This is a dataset of the RAG1 gene sequences from 33 lizard species. You are encouraged to read in detail the references in the script as they indicate many useful tools. Explore the dataset using the tools provided by the `ape` and `seqinr` packages. Take note of the lengths of all the sequences and the base composition.
 
 
-```{r}
+```{r 1-0}
 
 ## Gene bank accession numbers taken from http://www.jcsantosresearch.org/Class_2014_Spring_Comparative/pdf/week_2/Jan_13_15_2015_GenBank_part_2.pdf
 lizards_accession_numbers <- c("JF806202", "HM161150", "FJ356743", "JF806205", 
@@ -95,16 +90,11 @@ ape::write.dna(lizards_sequences, file ="lizard_seqs.fasta", format = "fasta",
 
 ## Question 1.1
 
-Simulate an artificial DNA sequence dataset. It should contain 33 sequence. The lengths of
-the sequences should be the same as in the lizard dataset, i.e. for each real sequence simulate
-an arti cial one. The simulation rule is as follows, each nucleotide is to be independently and
-randomly drawn from the distribution given by the base composition (frequencies) in the true
-lizard sequences. Save your dataset in a fasta format file. Remember to give unique names to
-your sequences. Report on the base composition in your simulated data.
+Simulate an artificial DNA sequence dataset. It should contain 33 sequence. The lengths of the sequences should be the same as in the lizard dataset, i.e. for each real sequence simulate an artffcial one. The simulation rule is as follows, each nucleotide is to be independently and randomly drawn from the distribution given by the base composition (frequencies) in the true lizard sequences. Save your dataset in a fasta format file. Remember to give unique names to your sequences. Report on the base composition in your simulated data.
 
 **Answer:**
 
-```{r}
+```{r 1-1}
 
 true_base_composition <- c(0.312, 0.205, 0.231, 0.252) # a c g t
 
@@ -131,8 +121,11 @@ print(sim_lizard_seqs)
 
 
 a: 31.2%
+
 c: 20.3%
+
 g: 23.0%
+
 t: 25.5%
 
 We obtain almost the same base composition as the true base composition for lizard sequences.
@@ -140,14 +133,9 @@ We obtain almost the same base composition as the true base composition for liza
 
 ## Question 1.2 *
 
-
-
-
-```{r}
+```{r 1-2}
 
 ```
-
-
 
 
 \newpage
@@ -155,16 +143,12 @@ We obtain almost the same base composition as the true base composition for liza
 
 # Question 2
 
-
 ## Question 2.1
 
-Report some basic statistics on each sequence dataset: individual base composition, $GC$ content,
-$CG$, $AT$ content. Also translate your sequences into protein sequences (see Lab 1) and report
-on the amino acid composition. In your simulated sequences, how many times did you observe
-a stop codon inside your sequence? Does this occur in your true sequences? Comment.
+Report some basic statistics on each sequence dataset: individual base composition, $GC$ content, $CG$, $AT$ content. Also translate your sequences into protein sequences (see Lab 1) and report on the amino acid composition. In your simulated sequences, how many times did you observe a stop codon inside your sequence? Does this occur in your true sequences? Comment.
 
 
-```{r}
+```{r 2-1}
 
 true_sequences <- read.FASTA("lizard_seqs.fasta")
 sim_sequences <- read.FASTA("sim_lizard_seqs.fasta")
@@ -196,33 +180,27 @@ calc_seq_stats <- function(all_seq, index_seq) {
  print(paste0("Base composition for ", names(all_seq)[index_seq],
               ": a=",base["a"],", c=",base["c"],", g=",base["g"],", t=",base["t"]))
  
- print(paste0("GC content for ", names(all_seq)[index_seq],
-              ": ",round(GC_content,3)))
+ print(paste0("GC content for ", names(all_seq)[index_seq],": ",round(GC_content,3)))
  
- print(paste0("CpG content for ", names(all_seq)[index_seq],
-              ": ",round(CpG,3)))
+ print(paste0("CpG content for ", names(all_seq)[index_seq],": ",round(CpG,3)))
  
-  print(paste0("ApT content for ", names(all_seq)[index_seq],
-              ": ",round(ApT,3)))
+ print(paste0("ApT content for ", names(all_seq)[index_seq],": ",round(ApT,3)))
  
 }
 
-
-
-
 ```
 
-```{r}
+```{r 2-1-2}
 # True lizard sequence 1 (JF806202)
 calc_seq_stats(all_seq = true_sequences, index_seq = 1)
 ```
 
-```{r}
+```{r 2-1-3}
 # Simulate lizard sequence 1 (sim_JF806202)
 calc_seq_stats(all_seq = sim_sequences, index_seq = 1)
 ```
 
-```{r}
+```{r 2-1-4}
 
 
 # ==============================================================================
@@ -255,16 +233,14 @@ process_protein_file <- function(file_path) {
     stringsAsFactors = FALSE
   )
   
-  
 }
 
 ```
 
-```{r}
+```{r 2-1-5}
 
 # File from Ying Luo
 codon_and_ORF <- read.csv("codon_and_ORF.csv")
-
 
 # https://www.ebi.ac.uk/jdispatcher/st/emboss_transeq/summary?jobId=emboss_transeq-I20241120-223345-0023-59554073-p1m&js=pass
 # Codon start = Frame = 3 
@@ -277,7 +253,7 @@ round(char_table[order(table(chars))],2)
 ```
 
 
-```{r}
+```{r 2-1-6}
 
 # https://www.ebi.ac.uk/jdispatcher/st/emboss_transeq/summary?jobId=emboss_transeq-I20241120-221152-0336-64754266-p1m&js=pass
 transeq_sim  <- process_protein_file("transeq_sim.out")
@@ -287,13 +263,9 @@ round(char_table[order(table(chars))],2)
 
 ```
 
-
-
-
-
 ## Question 2.2*
 
-```{r}
+```{r 2-2}
 
 
 
@@ -302,27 +274,28 @@ round(char_table[order(table(chars))],2)
 
 ## Question 2.3
 
-Align your sequences using software of your choice (a starter for R: https://stackoverflow.com/questions/4497747/how-to-perform-basic-multiple-sequence-alignments-in-r, you
-can also look what `Biopython`, `BioPerl` offer, use the `Clustal` family of programs or something
-else of your choice).
-Choose a distance measure between sequences, calculate for each alignment the distances
-between all pairs of sequences. Then, plot heatmaps visualizing the distances. Comment on
-what you can observe.
+Align your sequences using software of your choice (a starter for R: https://stackoverflow.com/questions/4497747/how-to-perform-basic-multiple-sequence-alignments-in-r, you can also look what `Biopython`, `BioPerl` offer, use the `Clustal` family of programs or something else of your choice). Choose a distance measure between sequences, calculate for each alignment the distances between all pairs of sequences. Then, plot heatmaps visualizing the distances. Comment on what you can observe.
 
-```{r}
+```{r 2-3-0}
+if (!requireNamespace("msa", quietly = TRUE)) {
+  install.packages("BiocManager")
+  BiocManager::install("msa")
+}
+```
 
 
-# if (!requireNamespace("msa", quietly = TRUE)) {
-#   install.packages("BiocManager")
-#   BiocManager::install("msa")
-# }
-
+```{r 2-3-1}
 library(seqinr)
 library(msa)
+library(Biostrings)
 
-# Calls the multiple sequence alignment algorithm ClustalW.
-clust_lizard_seqs <- msaClustalW("lizard_seqs.fasta", type = "dna")
-clust_sim_lizard_seqs <- msaClustalW("sim_lizard_seqs.fasta", type = "dna")
+dna_seqs <- readDNAStringSet("lizard_seqs.fasta")
+cleaned_seqs <- DNAStringSet(gsub("[^ATCG]", "", dna_seqs))
+clust_lizard_seqs <- msaClustalW(cleaned_seqs, type = "dna")
+
+dna_seqs_sim <- readDNAStringSet("sim_lizard_seqs.fasta")
+cleaned_seqs_sim <- DNAStringSet(gsub("[^ATCG]", "", dna_seqs_sim))
+clust_sim_lizard_seqs <- msaClustalW(cleaned_seqs_sim, type = "dna")
 
 # Convert MSA object to formats used in other sequence
 # type = "seqinr::alignment" because we want to use dist.alignment() later
@@ -334,18 +307,16 @@ converted_sim_lizard_seqs <- msaConvert(clust_sim_lizard_seqs, type = "seqinr::a
 dist_matrix_lizard_seqs <- as.matrix(dist.alignment(converted_lizard_seqs), matrix = "identity")
 dist_matrix_sim_lizard_seqs <- as.matrix(dist.alignment(converted_sim_lizard_seqs), matrix = "identity")
 
-
-
 ```
 
 
-```{r}
+```{r 2-3-2}
 heatmap(dist_matrix_lizard_seqs, main = "Distance between sequences (True lizard seq.)")
 ```
 
 
 
-```{r}
+```{r 2-3-3}
 heatmap(dist_matrix_sim_lizard_seqs, main = "Distance between sequences (Simulated seq.)")
 ```
 
@@ -356,23 +327,102 @@ heatmap(dist_matrix_sim_lizard_seqs, main = "Distance between sequences (Simulat
 
 ## Question 3.1
 
-Construct (using algorithm and software of your choice) phylogenetic trees from the three mul
-tiple alignments (or distance matrices) done in Question 2.3. You might want to look at the
-functions o ered by `ape`, `phangorn` (https://cran.r-project.org/web/packages/phangorn/vignettes/Trees.pdf) or go for some completely di erent software. Plot the inferred trees. Are
-the two based on the simulated data similar to expected?
-Perform a phylogenetic bootstrap analysis and report the bootstrap support for the individual
-clades, you can look at `ape::boot.phylo()`.
+Construct (using algorithm and software of your choice) phylogenetic trees from the three multiple alignments (or distance matrices) done in Question 2.3. You might want to look at the functions offered by `ape`, `phangorn` (https://cran.r-project.org/web/packages/phangorn/vignettes/Trees.pdf) or go for some completely different software. Plot the inferred trees. Are the two based on the simulated data similar to expected?
+Perform a phylogenetic bootstrap analysis and report the bootstrap support for the individual clades, you can look at `ape::boot.phylo()`.
+
+```{r 3-1}
+# FASTME Tree Estimation Based on the Minimum Evolution Algorithm
+phyl1 <- nj(dist_matrix_lizard_seqs)
+plot(phyl1)
+#Other options to create the tree : fastme.bal bionj, mvr(X, V), nj 
+#print.phylo(phyl1)
+```
 
 ```{r}
+# FASTME Tree Estimation Based on the Minimum Evolution Algorithm
+phyl2 <-nj(dist_matrix_sim_lizard_seqs)
+plot(phyl2)
+```
+```{r}
+#Boostrapping
+## from ?boot.phylo:
+f <- function(x) nj(x)
+tw <- f(dist_matrix_lizard_seqs)
+set.seed(1)
+## bootstrap with 1000 replications:
+(bp <- boot.phylo(tw, dist_matrix_lizard_seqs, f, B=1000, quiet=TRUE))
+## more readable but the tree is really unrooted:
+plot(tw)
+drawSupportOnEdges(bp)
+
 
 ```
 
 
 
+```{r}
+#Boostrapping
+## from ?boot.phylo:
+f <- function(x) nj(x)
+tw <- f(dist_matrix_sim_lizard_seqs)
+set.seed(1)
+## bootstrap with 100 replications:
+(bp <- boot.phylo(tw, dist_matrix_sim_lizard_seqs, f, B=1000, quiet=TRUE))
+plot(tw)
+drawSupportOnEdges(bp)
+```
+
+Interpretation Scale:
+
+70-95%: Moderately supported branch
+95-100%: Highly supported branch
+<70%: Weak support, less confidence in that branching pattern
+
+For both true and simulated trees, none of the branches have significant suppport (>70%, i.e. >700)
+Tree building functions tested : fastme.bal, bionj, nj.
+
+
 ## Question 3.2*
 
-```{r}
+Compare your inferred trees and also your simulated one. Apart from visualizing the trees one may calculate various indices related to them and distances between the trees. Explore what indices and metrics the `ape`, `distory`, `phangorn`, `phyloTop`, `TotalCopheneticIndex` or `treespace` R packages offer, choose some and report the results in a meaningful way. You might have to save your tree to drive and then read in it using e.g. ape’s tree reading functionality.
 
+```{r 3-2, eval=FALSE}
+ape::comparePhylo(phyl1, phyl2)
+#Metrics : 
+branching.times(phyl1)
+branching.times(phyl2)
+
+#compar.cheverud         Cheverud's Comparative Method
+#compar.gee              Comparative Analysis with GEEs
+#compar.lynch            Lynch's Comparative Method
+#compar.ou               Ornstein-Uhlenbeck Model for Continuous Characters
+
+a = compute.brlen(phyl1)           #Branch Lengths Computation
+plot(a)
+b = compute.brtime(phyl1)          #Compute and Set Branching Times
+plot(b)    
+
+heatmap(cophenetic.phylo(phyl1))
+heatmap(cophenetic.phylo(phyl2))
+
+corBlomberg             #Blomberg et al.'s Correlation Structure
+corBrownian             #Brownian Correlation Structure
+corClasses              #Phylogenetic Correlation Structures
+corGrafen               #Grafen's (1989) Correlation Structure
+corMartins              #Martins's (1997) Correlation Structure
+corPagel                #Pagel's "lambda" Correlation Structure
+corphylo                #Correlations among Multiple Traits with Phylogenetic Signal
+correlogram.formula     #Phylogenetic Correlogram
+
+dist.topo(phyl1, phyl2) #needs similar names
+
+gammaStat               #Gamma-Statistic of Pybus and Harvey, requires ultrametric trees
+
+
+root                    #Roots Phylogenetic Trees
+
+summary.phylo(phyl1)
+summary.phylo(phyl2)
 ```
 
 
