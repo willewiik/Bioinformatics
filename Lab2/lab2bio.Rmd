@@ -59,6 +59,8 @@ set.seed(12345)
 library(dplyr)
 library(ape)
 library(seqinr)
+library(msa)
+library(Biostrings)
 ```
 
 
@@ -128,7 +130,7 @@ g: 23.0%
 
 t: 25.5%
 
-We obtain almost the same base composition as the true base composition for lizard sequences.
+We obtain almost the same base composition as the true base composition for lizard sequences, which is to be expected.
 
 
 ## Question 1.2 *
@@ -202,72 +204,49 @@ calc_seq_stats(all_seq = sim_sequences, index_seq = 1)
 
 ```{r 2-1-4}
 
+# "Cleanning" the sequences because they were some issues on my personal computer
+dna_seqs <- readDNAStringSet("lizard_seqs.fasta")
+cleaned_seqs <- DNAStringSet(gsub("[^ATCG]", "", dna_seqs))
 
-# ==============================================================================
-# From chatGPT, how to get frequency every charchater per sequence for an out file
-# ==============================================================================
 
-
-process_protein_file <- function(file_path) {
-  # Read the file
-  lines <- readLines(file_path)
-  
-  # Extract headers (lines starting with ">")
-  headers <- grep("^>", lines, value = TRUE)
-  
-  # Extract sequence lines (lines not starting with ">")
-  header_indices <- grep("^>", lines)
-  
-  # Create a list of sequences
-  sequences <- mapply(function(start, end) {
-    paste(lines[(start + 1):(end - 1)], collapse = "")
-  }, header_indices, c(header_indices[-1] - 1, length(lines)), SIMPLIFY = TRUE)
-  
-  # Remove ">" from headers
-  headers <- gsub("^>", "", headers)
-  
-  # Create the data frame
-  protein_data <- data.frame(
-    Header = headers,
-    Sequence = sequences,
-    stringsAsFactors = FALSE
-  )
-  
-}
-
-```
-
-```{r 2-1-5}
+dna_seqs_sim <- readDNAStringSet("sim_lizard_seqs.fasta")
+cleaned_seqs_sim <- DNAStringSet(gsub("[^ATCG]", "", dna_seqs_sim))
 
 # File from Ying Luo
 codon_and_ORF <- read.csv("codon_and_ORF.csv")
 
-# https://www.ebi.ac.uk/jdispatcher/st/emboss_transeq/summary?jobId=emboss_transeq-I20241120-223345-0023-59554073-p1m&js=pass
-# Codon start = Frame = 3 
-transeq_true <- process_protein_file("transeq_true.out")
-chars <- strsplit(transeq_true[1,2], NULL)[[1]] # JF806202
-char_table <- prop.table(table(chars))
-round(char_table[order(table(chars))],2)
+vec <- c()
+for(i in 1:33){
+  start_codon<- codon_and_ORF$codon_start[i]
+  seq = cleaned_seqs[[i]]
+  seq_vec = unlist(strsplit(tolower(as.character(seq)),''))
+  translation = seqinr::translate(seq_vec, start_codon-1)
+  vec <- c(vec, translation)
+}
+
+char_table <- prop.table(table(vec))
+round(char_table[order(table(vec))],2)
+
+vec_sim <- c()
+for(i in 1:33){
+  start_codon<- codon_and_ORF$codon_start[i]
+  seq = cleaned_seqs_sim[[i]]
+  seq_vec = unlist(strsplit(tolower(as.character(seq)),''))
+  translation = seqinr::translate(seq_vec)
+  vec_sim <- c(vec_sim, translation)
+}
+
+char_table <- prop.table(table(vec_sim))
+round(char_table[order(table(vec_sim))],2)
 
 
 ```
 
-
-```{r 2-1-6}
-
-# https://www.ebi.ac.uk/jdispatcher/st/emboss_transeq/summary?jobId=emboss_transeq-I20241120-221152-0336-64754266-p1m&js=pass
-transeq_sim  <- process_protein_file("transeq_sim.out")
-chars <- strsplit(transeq_sim[1,2], NULL)[[1]] # seq_1
-char_table <- prop.table(table(chars))
-round(char_table[order(table(chars))],2)
-
-```
+For the true sequences, we get almost no stopping codons (*), while for the simulated sequences, we get a proportion of stopping codons proportional to the number of ways to obtain a stopping codon from the standard codon table. This is to be expected since the simulated sequences generate proteins at random. For the true sequences, we expect to have much less stopping codons since they should only appear at the end of the protein.
 
 ## Question 2.2*
 
 ```{r 2-2}
-
-
 
 ```
 
@@ -276,7 +255,7 @@ round(char_table[order(table(chars))],2)
 
 Align your sequences using software of your choice (a starter for R: https://stackoverflow.com/questions/4497747/how-to-perform-basic-multiple-sequence-alignments-in-r, you can also look what `Biopython`, `BioPerl` offer, use the `Clustal` family of programs or something else of your choice). Choose a distance measure between sequences, calculate for each alignment the distances between all pairs of sequences. Then, plot heatmaps visualizing the distances. Comment on what you can observe.
 
-```{r 2-3-0}
+```{r 2-3-0, include=FALSE}
 if (!requireNamespace("msa", quietly = TRUE)) {
   install.packages("BiocManager")
   BiocManager::install("msa")
@@ -285,16 +264,8 @@ if (!requireNamespace("msa", quietly = TRUE)) {
 
 
 ```{r 2-3-1}
-library(seqinr)
-library(msa)
-library(Biostrings)
 
-dna_seqs <- readDNAStringSet("lizard_seqs.fasta")
-cleaned_seqs <- DNAStringSet(gsub("[^ATCG]", "", dna_seqs))
 clust_lizard_seqs <- msaClustalW(cleaned_seqs, type = "dna")
-
-dna_seqs_sim <- readDNAStringSet("sim_lizard_seqs.fasta")
-cleaned_seqs_sim <- DNAStringSet(gsub("[^ATCG]", "", dna_seqs_sim))
 clust_sim_lizard_seqs <- msaClustalW(cleaned_seqs_sim, type = "dna")
 
 # Convert MSA object to formats used in other sequence
@@ -320,7 +291,9 @@ heatmap(dist_matrix_lizard_seqs, main = "Distance between sequences (True lizard
 heatmap(dist_matrix_sim_lizard_seqs, main = "Distance between sequences (Simulated seq.)")
 ```
 
+**Answer**
 
+We observer some similarities between genes in the true data (heat on the heatmap), while for the simulated data, there is practically no similarity. This is expected because the simulated data comes from a iid process, while the true data comes from genetic evolution.
 
 # Question 3
 
@@ -331,15 +304,14 @@ Construct (using algorithm and software of your choice) phylogenetic trees from 
 Perform a phylogenetic bootstrap analysis and report the bootstrap support for the individual clades, you can look at `ape::boot.phylo()`.
 
 ```{r 3-1}
-# FASTME Tree Estimation Based on the Minimum Evolution Algorithm
+# Neighbor-Joining Tree Estimation :
 phyl1 <- nj(dist_matrix_lizard_seqs)
 plot(phyl1)
 #Other options to create the tree : fastme.bal bionj, mvr(X, V), nj 
-#print.phylo(phyl1)
 ```
 
 ```{r}
-# FASTME Tree Estimation Based on the Minimum Evolution Algorithm
+# Neighbor-Joining Tree Estimation :
 phyl2 <-nj(dist_matrix_sim_lizard_seqs)
 plot(phyl2)
 ```
@@ -348,9 +320,8 @@ plot(phyl2)
 ## from ?boot.phylo:
 f <- function(x) nj(x)
 tw <- f(dist_matrix_lizard_seqs)
-set.seed(1)
 ## bootstrap with 1000 replications:
-(bp <- boot.phylo(tw, dist_matrix_lizard_seqs, f, B=1000, quiet=TRUE))
+(bp <- boot.phylo(tw, dist_matrix_lizard_seqs, f, B=100, quiet=TRUE))
 ## more readable but the tree is really unrooted:
 plot(tw)
 drawSupportOnEdges(bp)
@@ -365,9 +336,8 @@ drawSupportOnEdges(bp)
 ## from ?boot.phylo:
 f <- function(x) nj(x)
 tw <- f(dist_matrix_sim_lizard_seqs)
-set.seed(1)
 ## bootstrap with 100 replications:
-(bp <- boot.phylo(tw, dist_matrix_sim_lizard_seqs, f, B=1000, quiet=TRUE))
+(bp <- boot.phylo(tw, dist_matrix_sim_lizard_seqs, f, B=100, quiet=TRUE))
 plot(tw)
 drawSupportOnEdges(bp)
 ```
@@ -378,8 +348,8 @@ Interpretation Scale:
 95-100%: Highly supported branch
 <70%: Weak support, less confidence in that branching pattern
 
-For both true and simulated trees, none of the branches have significant suppport (>70%, i.e. >700)
-Tree building functions tested : fastme.bal, bionj, nj.
+For both true and simulated trees, none of the branches have significant suppport (>70%, i.e. support>70)
+Tree building functions tested : fastme.bal, bionj, nj., all yielded the same results.
 
 
 ## Question 3.2*
@@ -388,27 +358,36 @@ Compare your inferred trees and also your simulated one. Apart from visualizing 
 
 ```{r 3-2}
 ape::comparePhylo(phyl1, phyl2)
+```
+
+
+```{r 3-3}
 #Metrics : 
+
 branching.times(phyl1)
+
 branching.times(phyl2)
+```
 
-#compar.cheverud         Cheverud's Comparative Method
-#compar.gee              Comparative Analysis with GEEs
-#compar.lynch            Lynch's Comparative Method
-#compar.ou               Ornstein-Uhlenbeck Model for Continuous Characters
 
-a = compute.brlen(phyl1)           #Branch Lengths Computation
-plot(a)
-b = compute.brtime(phyl1)          #Compute and Set Branching Times
-plot(b)    
-
-a = compute.brlen(phyl2)           #Branch Lengths Computation
-plot(a)
-b = compute.brtime(phyl2)          #Compute and Set Branching Times
-plot(b)    
-
-heatmap(cophenetic.phylo(phyl1))
-heatmap(cophenetic.phylo(phyl2))
+```{r 3-4}
+# #compar.cheverud         Cheverud's Comparative Method
+# #compar.gee              Comparative Analysis with GEEs
+# #compar.lynch            Lynch's Comparative Method
+# #compar.ou               Ornstein-Uhlenbeck Model for Continuous Characters
+# 
+# a = compute.brlen(phyl1)           #Branch Lengths Computation
+# plot(a)
+# b = compute.brtime(phyl1)          #Compute and Set Branching Times
+# plot(b)    
+# 
+# a = compute.brlen(phyl2)           #Branch Lengths Computation
+# plot(a)
+# b = compute.brtime(phyl2)          #Compute and Set Branching Times
+# plot(b)    
+# 
+# heatmap(cophenetic.phylo(phyl1))
+# heatmap(cophenetic.phylo(phyl2))
 
 # corBlomberg             #Blomberg et al.'s Correlation Structure
 # corBrownian             #Brownian Correlation Structure
@@ -429,7 +408,9 @@ summary.phylo(phyl1)
 summary.phylo(phyl2)
 ```
 
-True data phylogenetic tree Branch lengths stats:
+**Answer:**
+
+*True data phylogenetic tree Branch lengths stats:*
 
 mean: 0.05191795 , variance: 0.001511728 
 
@@ -444,7 +425,7 @@ Median: 0.051113051
 Max.: 0.138188147
 
 
-Simulated data phylogenetic tree Branch lengths stats:
+*Simulated data phylogenetic tree Branch lengths stats:*
 
 mean: 0.2178854 , variance: 0.04231989 
 
@@ -458,4 +439,4 @@ Median: 0.3607140035
 
 Max.: 0.4275080112 
 
-The simulated data phylogeneteic tree branch length has on average much longer branch lengths (0.05 vs 0.22), but with also much more variance (0.0015 vs 0.0423). This these results correlate with the obeservation from the heatmaps which shows that in the simulated data, no clade is close to any other, which makes sense since the data was randomly generated and should be i.i.d. 
+The simulated data phylogeneteic tree branch length has on average much longer branch lengths (0.05 vs 0.22), but with also much more variance (0.0015 vs 0.0423). These results correlate with the observation from the heatmaps which shows that in the simulated data, no clade is close to any other, which makes sense since the data was randomly generated and should be i.i.d. 
