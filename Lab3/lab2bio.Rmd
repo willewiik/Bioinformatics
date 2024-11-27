@@ -1,0 +1,157 @@
+---
+title: "LAB 3 Bioinformatics"
+author:
+- Hugo Morvan
+- William Wiik
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    fig_caption: true
+    number_sections: true
+  html_document:
+    df_print: paged
+  word_document: default
+geometry: top=100pt,bottom=100pt,left=68pt,right=66pt
+header-includes:
+- \usepackage{float}
+- \usepackage{longtable}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{titling}
+- \renewcommand{\headrulewidth}{0pt}
+- \renewcommand{\and}{\\}
+- \pretitle{\centering\vspace{0cm}{732A51 Bioinformatics \par}\vspace{5cm}\Huge\textbf}
+- \posttitle{\vspace{1cm}\large\textbf{}\par}
+- \preauthor{\centering\vspace{4cm}\normalsize}
+- \postauthor{\par\vspace{2cm}}
+- \predate{\centering{\normalsize STIMA \\ Department of Computer and Information
+  Science \\ Linköpings universitet \par}}
+- \postdate{\par\vspace{0cm}}
+- \raggedbottom
+---
+
+
+<!-- page number pos -->
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
+
+<!-- no page nr on first page  -->
+\pagenumbering{gobble}
+
+<!-- Anger sidbrytning -->
+\clearpage
+
+<!-- creating the table of contents -->
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+<!-- new page -->
+\clearpage
+
+<!-- starting the count on 1 after the contents -->
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+```{r, include = FALSE,message=FALSE}
+set.seed(12345)
+library(dplyr)
+
+```
+
+
+# Question 1
+
+Using the script http://ape-package.ird.fr/APER/APER2/SylviaWarblers.R obtain the *Sylvia*
+warblers phylogeny (the script saves in in the file sylvia nj k80.tre). The geographical range
+data can be found in http://ape-package.ird.fr/APER/APER2/sylvia_data.txt and in the
+script is referenced as `DF$geo.range`. Notice that one tip is removed due to missing data
+
+
+```{r 1-0}
+# 
+# tr <- drop.tip(tr, "Chamaea_fasciata")
+# DF <- sylvia.eco[tr$tip.label, ]
+
+
+```
+
+
+## Question 1.1
+
+Explain all the steps in the script required to obtain the phylogeny and trait data.
+
+
+**Answer:**
+
+```{r 1-1}
+
+```
+
+
+## Question 1.2 *
+
+```{r 1-2}
+
+```
+
+
+\newpage
+
+
+# Question 2
+
+Install the `ade4` package. Included with it you will find the carnivores dataset, `data(carni70)`
+
+## Question 2.1
+
+Explore the data set and report what can be found in it. Provide some plots.
+
+
+```{r 2-1}
+library(ade4)
+library(ggplot2)
+library(cowplot)
+
+data(carni70)
+
+tab_df <- as.data.frame(carni70$tab)
+summary(tab_df)
+
+
+p1 <- ggplot(tab_df, aes(x = size)) + 
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(title = "Histogram of Size", x = "Size", y = "Frequency") + theme_bw()
+
+p2 <- ggplot(tab_df, aes(x = range)) + 
+  geom_histogram(binwidth = 1, fill = "salmon", color = "black", alpha = 0.7) +
+  labs(title = "Histogram of Range", x = "Range", y = "Frequency") + theme_bw()
+
+p3 <- ggplot(tab_df, aes(x = size, y = range)) + 
+  geom_point(color = "blue") + 
+  labs(title = "Scatter Plot of Size vs Range", x = "Size", y = "Range") + theme_bw()
+
+
+cowplot::plot_grid(p1, p2, p3, ncol = 2)  
+
+
+
+
+```
+
+```{r, echo=F}
+
+print(paste("Total number of carnivores:",nrow(tab_df)))
+
+print(paste("The carnivore with biggest size:",rownames(tab_df)[which.max(tab_df$size)]))
+print(paste("The carnivore with smallest size:",rownames(tab_df)[which.min(tab_df$size)]))
+
+print(paste("The carnivore with biggest range:",rownames(tab_df)[which.max(tab_df$range)]))
+print(paste("The carnivore with smallest range:",rownames(tab_df)[which.min(tab_df$range)]))
+```
+There are 70 carnivores, with a median size of 3.2 and a median range of 6.1. Two clear outliers in size are Ursus arctos (Brown bear) and Tremarctos ornatus (Spectacled bear).
+
+
+
+## Question 2.2*
