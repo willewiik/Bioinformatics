@@ -1,6 +1,6 @@
 library(ape)
 
-### dogshit
+### 
 ### Chapter 3
 ###
 
@@ -10,7 +10,7 @@ sylvia.seq <- read.GenBank(x)
 
 sylvia.clus <- clustal(sylvia.seq)
 library(phyloch)
-sylvia.maff <- mafft(sylvia.seq)
+sylvia.maff <- mafft(sylvia.seq, path = "/usr/bin/mafft")
 identical(sylvia.clus[x, ], sylvia.maff[x, ])
 
 taxa.sylvia <- attr(sylvia.seq, "species")
@@ -28,7 +28,7 @@ save(sylvia.clus, taxa.sylvia, sylvia.eco,
 ###
 ### Chapter 5
 ###
-
+sylvia.seq.ali<-sylvia.clus
 syl.K80 <- dist.dna(sylvia.seq.ali, pairwise.deletion = TRUE)
 syl.F84 <- dist.dna(sylvia.seq.ali, model = "F84", p = TRUE)
 syl.TN93 <- dist.dna(sylvia.seq.ali, model = "TN93", p = TRUE)
@@ -86,8 +86,9 @@ add.scale.bar(length = 0.01)
 write.tree(nj.est, "sylvia_nj_k80.tre")
 
 write.dna(sylvia.seq.ali, "sylvia.txt")
-phyml.sylvia <- phymltest("sylvia.txt", execname = "~/phyml")
+phyml.sylvia <- phymltest("sylvia.txt", execname = "/home/h/Documents/phylml/phyml/src/phyml")
 summary(phyml.sylvia)
+
 plot(phyml.sylvia, col = "black")
 TR <- read.tree("sylvia.txt_phyml_tree.txt")
 mltr.sylvia <- TR[[28]]
@@ -179,3 +180,5 @@ for (i in 1:nrep) {
 }
 hist(Pvls, freq = FALSE, main = "")
 lines(density(Pvls))
+
+
