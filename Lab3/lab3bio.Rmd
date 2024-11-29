@@ -314,6 +314,48 @@ print(ans)
 ```
 
 
+We are trying to estimate the trait of the ancestor species at the root. 
+
+Using the model "Equal Rate" , we obtain Log-likelihood: -20.89321, The estimated rate is 5.1813 +/- 1.7578 . The scaled log-likelihood at the root is:
+
+temp: 0.0147, temptrop : 0.9401, trop : 0.0451, 
+
+meaning that the model estimates the most likely trait to be temptrop for the root ancestor.
+
+
+
+Using the model "Symmetric", we obtain Log-likelihood: -19.52549. The estimated rates are:
+
+- temp <-> temptrop rate : 3.4054 +/- 1.8762
+- temp <-> trop rate : 0 (NaN std err)
+- temptrop <-> trop rate : 9.3672 +/- 4.1510
+
+The scaled log-likelihood at the root is: 
+
+temp: 0.00174, temptrop: 0.8397, trop: 0.1585
+
+meaning that the model estimates the most likely trait to be temptrop for the root ancestor.
+
+- temp -> temptrop: 2.7162 +/- 2.0550
+- temp -> trop: 0 +/- 15.5967
+- temptrop -> temp: 0 +/- 31.8116
+- temptrop -> trop: 0 +/- NaN
+- trop -> temp: 0 +/- 26.6413
+- trop -> temptrop:  6.5245 +/- 3.9666
+
+
+
+Using the model "All rates different between states", we obtain Log-likelihood: -20.07269. The estimated rates are:
+
+The scaled log-likelihood at the root is: 
+
+temp: 0, temptrop: 1, trop: 0, 
+
+meaning that the model is sure that the trait at the root was temptrop.
+
+
+Based on the likelihood, the best model is the Symmetric model, however, all three models estimate the ancestral character (trait) to be "temptrop."
+
 \newpage
 
 
