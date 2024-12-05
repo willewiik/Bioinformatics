@@ -91,14 +91,14 @@ library(ggplot2)
 Run all the R code and reproduce the graphics. Go carefully through the R code and explain in your words what each step does.
 HINT Recall what a design/model matrix is from linear regression.
 
-```{r 1.1, eval=FALSE}
+```{r 1.1}
 # eval = FALSE because running this multiple times Errors (file already exists)
 library(GEOquery)
 x = getGEOSuppFiles("GSE20986")
 x
 untar("GSE20986/GSE20986_RAW.tar", exdir = "data")
 cels = list.files("data/", pattern = "[gz]")
-sapply(paste("data", cels, sep = "/"), gunzip)
+#sapply(paste("data", cels, sep = "/"), gunzip)
 phenodata = matrix(rep(list.files("data"), 2), ncol =2)
 class(phenodata)
 phenodata <- as.data.frame(phenodata)
