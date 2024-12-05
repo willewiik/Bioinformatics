@@ -1,0 +1,79 @@
+---
+title: "LAB 4 Bioinformatics"
+author:
+- Hugo Morvan
+- William Wiik
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    fig_caption: true
+    number_sections: true
+  html_document:
+    df_print: paged
+  word_document: default
+geometry: top=100pt,bottom=100pt,left=68pt,right=66pt
+header-includes:
+- \usepackage{float}
+- \usepackage{longtable}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{titling}
+- \renewcommand{\headrulewidth}{0pt}
+- \renewcommand{\and}{\\}
+- \pretitle{\centering\vspace{0cm}{732A51 Bioinformatics \par}\vspace{5cm}\Huge\textbf}
+- \posttitle{\vspace{1cm}\large\textbf{}\par}
+- \preauthor{\centering\vspace{4cm}\normalsize}
+- \postauthor{\par\vspace{2cm}}
+- \predate{\centering{\normalsize STIMA \\ Department of Computer and Information
+  Science \\ Linköpings universitet \par}}
+- \postdate{\par\vspace{0cm}}
+- \raggedbottom
+---
+
+
+<!-- page number pos -->
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
+
+<!-- no page nr on first page  -->
+\pagenumbering{gobble}
+
+<!-- Anger sidbrytning -->
+\clearpage
+
+<!-- creating the table of contents -->
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+<!-- new page -->
+\clearpage
+
+<!-- starting the count on 1 after the contents -->
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+```{r, include = FALSE,message=FALSE}
+set.seed(12345)
+library(dplyr)
+```
+
+
+# Question 1
+
+Run all the R code and reproduce the graphics. Go carefully through the R code and explain in your words what each step does.
+HINT Recall what a design/model matrix is from linear regression.
+
+# Question 2
+
+In the presented analysis, there are no plots of raw paired data. In the section where the contrasts are defined find the three contrasts. Present the variables versus each other original, log–scaled and MA–plot for each considered pair both before and after normalization. A cluster analysis is performed on the page but not reported. Present plots and also draw heatmaps.
+
+# Question 3
+
+The volcano plot is only for huvec versus choroid. Provide volcano plots for the other pairs. Indicate significantly differentially expressed genes. Explain how they are found.
+
+# Question 4
+
+Try to find more information on the genes that are reported to be significantly differentially expressed. The place to start off is https://www.ncbi.nlm.nih.gov/gene/, remember that the data is from the species human. Try to look also for other databases where (some) information on the genes may be found. Try to follow on some of the provided links. Report in your own words on what you find.
+Report all the Gene Ontology (GO) terms associated with each gene. Are any of the GO terms common between genes? If so do the common GO terms seem to be related to anything particular? Try to present GO analysis in an informative manner, if possible visualize.
