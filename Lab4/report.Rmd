@@ -59,7 +59,7 @@ knitr::opts_chunk$set(cache = TRUE)
 set.seed(12345)
 ```
 
-```{r libraries}
+```{r libraries, message=FALSE, warning=FALSE}
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install()
@@ -92,13 +92,13 @@ Run all the R code and reproduce the graphics. Go carefully through the R code a
 HINT Recall what a design/model matrix is from linear regression.
 
 ```{r 1.1}
-# eval = FALSE because running this multiple times Errors (file already exists)
+# Important note: before knitting, delete the data folder
 library(GEOquery)
 x = getGEOSuppFiles("GSE20986")
 x
 untar("GSE20986/GSE20986_RAW.tar", exdir = "data")
 cels = list.files("data/", pattern = "[gz]")
-#sapply(paste("data", cels, sep = "/"), gunzip)
+sapply(paste("data", cels, sep = "/"), gunzip)
 phenodata = matrix(rep(list.files("data"), 2), ncol =2)
 class(phenodata)
 phenodata <- as.data.frame(phenodata)
