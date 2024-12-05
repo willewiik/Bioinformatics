@@ -229,6 +229,44 @@ volcano +
 
 In the presented analysis, there are no plots of raw paired data. In the section where the contrasts are defined find the three contrasts. Present the variables versus each other original, log–scaled and MA–plot for each considered pair both before and after normalization. A cluster analysis is performed on the page but not reported. Present plots and also draw heatmaps.
 
+## huvec_choroid pair
+
+```{r 2.1}
+# Original
+
+# Log-scaled
+
+# MA-plot
+
+
+```
+
+## huvec_iris pair
+
+```{r 2.2}
+# Original
+
+# Log-scaled
+
+# MA-plot
+
+```
+
+
+## huvec_retina pair
+
+```{r 2.3}
+# Original
+
+# Log-scaled
+
+# MA-plot
+
+```
+
+## cluster analysis ?
+
+
 # Question 3
 
 The volcano plot is only for huvec versus choroid. Provide volcano plots for the other pairs. Indicate significantly differentially expressed genes. Explain how they are found.
