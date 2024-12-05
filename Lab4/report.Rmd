@@ -119,7 +119,7 @@ write.table(phenodata, "data/phenodata.txt", quote = F, sep = "\t", row.names = 
 ```
 
 
-```{r 1.2}
+```{r 1.2, warning=FALSE}
 library(simpleaffy)
 celfiles <- read.affy(covdesc = "phenodata.txt", path = "data")
 boxplot(celfiles)
@@ -173,7 +173,7 @@ design
 contrast.matrix = makeContrasts(
               huvec_choroid = huvec - choroid, 
               huvec_retina = huvec - retina, 
-              huvec_iris <- huvec - iris, 
+              huvec_iris = huvec - iris, 
               levels = design)
 
 fit = lmFit(celfiles.gcrma, design)
@@ -232,6 +232,70 @@ In the presented analysis, there are no plots of raw paired data. In the section
 # Question 3
 
 The volcano plot is only for huvec versus choroid. Provide volcano plots for the other pairs. Indicate significantly differentially expressed genes. Explain how they are found.
+
+## Huvec - Retina pair volcano plot
+
+```{r 4.1}
+
+results <- topTable(huvec_ebay, number = 100000, coef = "huvec_retina")
+results <- cbind(results, getsymbols)
+
+summary(results)
+
+results$threshold <- "1"
+a <- subset(results, adj.P.Val < 0.05 & logFC > 5)
+results[rownames(a), "threshold"] <- "2"
+b <- subset(results, adj.P.Val < 0.05 & logFC < -5)
+results[rownames(b), "threshold"] <- "3"
+table(results$threshold)
+
+volcano <- ggplot(data = results, 
+                  aes(x = logFC, y = -1*log10(adj.P.Val), 
+                      colour = threshold, 
+                      label = getsymbols))
+
+volcano <- volcano + 
+  geom_point() + 
+  scale_color_manual(values = c("black", "red", "green"), 
+                     labels = c("Not Significant", "Upregulated", "Downregulated"), 
+                     name = "Key/Legend")
+
+volcano + 
+  geom_text(data = subset(results, logFC > 5 & -1*log10(adj.P.Val) > 5), aes(x = logFC, y = -1*log10(adj.P.Val), colour = threshold, label = getsymbols)  )
+
+```
+
+## Huvec - Iris pair volcano plot
+
+```{r 4.2}
+
+results <- topTable(huvec_ebay, number = 100000, coef = "huvec_iris")
+results <- cbind(results, getsymbols)
+
+summary(results)
+
+results$threshold <- "1"
+a <- subset(results, adj.P.Val < 0.05 & logFC > 5)
+results[rownames(a), "threshold"] <- "2"
+b <- subset(results, adj.P.Val < 0.05 & logFC < -5)
+results[rownames(b), "threshold"] <- "3"
+table(results$threshold)
+
+volcano <- ggplot(data = results, 
+                  aes(x = logFC, y = -1*log10(adj.P.Val), 
+                      colour = threshold, 
+                      label = getsymbols))
+
+volcano <- volcano + 
+  geom_point() + 
+  scale_color_manual(values = c("black", "red", "green"), 
+                     labels = c("Not Significant", "Upregulated", "Downregulated"), 
+                     name = "Key/Legend")
+
+volcano + 
+  geom_text(data = subset(results, logFC > 5 & -1*log10(adj.P.Val) > 5), aes(x = logFC, y = -1*log10(adj.P.Val), colour = threshold, label = getsymbols)  )
+
+```
 
 # Question 4
 
