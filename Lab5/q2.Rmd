@@ -1,0 +1,197 @@
+---
+title: "LAB 5 Bioinformatics"
+author:
+- Hugo Morvan
+- William Wiik
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    fig_caption: true
+    number_sections: true
+  html_document:
+    df_print: paged
+  word_document: default
+geometry: top=100pt,bottom=100pt,left=68pt,right=66pt
+header-includes:
+- \usepackage{float}
+- \usepackage{longtable}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{titling}
+- \renewcommand{\headrulewidth}{0pt}
+- \renewcommand{\and}{\\}
+- \pretitle{\centering\vspace{0cm}{732A51 Bioinformatics \par}\vspace{5cm}\Huge\textbf}
+- \posttitle{\vspace{1cm}\large\textbf{}\par}
+- \preauthor{\centering\vspace{4cm}\normalsize}
+- \postauthor{\par\vspace{2cm}}
+- \predate{\centering{\normalsize STIMA \\ Department of Computer and Information
+  Science \\ Linköpings universitet \par}}
+- \postdate{\par\vspace{0cm}}
+- \raggedbottom
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<!-- page number pos -->
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
+
+<!-- no page nr on first page  -->
+\pagenumbering{gobble}
+
+<!-- Anger sidbrytning -->
+\clearpage
+
+<!-- creating the table of contents -->
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+<!-- new page -->
+\clearpage
+
+<!-- starting the count on 1 after the contents -->
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+```{r, include = FALSE,message=FALSE}
+set.seed(12345)
+
+```
+
+# Question 2
+
+
+Recreate one of the three analyses that can be found on https://strimmerlab.github.io/software/genenet/index.html. Document and discuss all your steps. In the analyses there is the step where you select the edges to keep. There a particular criterion is chosen for edge inclusion. Vary this criterion and explore how the resulting clusters will differ with the changes. Take one found cluster, identify the elements in it and try to find information on this cluster. Is it related to some known biological phenomena? If you do not find anything, then document your search attempts.
+```{r data}
+con <- gzfile("ChG-Miner_miner-chem-gene.tsv.gz", "rt")
+data <- read.table(con, sep = "\t", header = FALSE)
+close(con)
+colnames(data) <- c("Drug","Gene")
+```
+
+## Graph 1
+
+```{r plot1, fig.width=16, fig.height=16, cache=TRUE}
+library(igraph)
+
+# Function to create and plot a bipartite network from an edge matrix
+plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
+  # Create unique node names
+  drugs <- unique(edge_matrix[,1])
+  genes <- unique(edge_matrix[,2])
+  
+  # Create the graph
+  g <- make_empty_graph(directed = FALSE)
+  
+  # Add all nodes
+  all_nodes <- c(drugs, genes)
+  g <- add_vertices(g, length(all_nodes), name = all_nodes)
+  
+  # Create type attribute for bipartite graph
+  V(g)$type <- c(rep(TRUE, length(drugs)), rep(FALSE, length(genes)))
+  
+  # Add edges
+  for(i in 1:nrow(edge_matrix)) {
+    g <- add_edges(g, 
+                   c(which(V(g)$name == edge_matrix[i,1]), 
+                     which(V(g)$name == edge_matrix[i,2])))
+  }
+  
+  # Set node colors based on type
+  #V(g)$color <- ifelse(V(g)$type, "lightblue", "lightgreen")
+  
+  comms <- cluster_louvain(g)
+  #print(length(unique(comms)))
+  mems <- membership(comms)
+  comm_col <- rainbow(length(unique(comms)))[mems]
+  #print(length(comm_col))
+  V(g)$shape <- ifelse(V(g)$type, "circle", "square")
+  # Plot the network
+  plot(g, 
+       vertex.label = V(g)$name,
+       vertex.shape = V(g)$shape,
+       vertex.color = comm_col,
+       vertex.label.cex = 0.1,  # Adjust label size
+       vertex.size = 5,         # Node size
+       vertex.label.color = "black",
+       main = title#,
+       #layout = layout_as_bipartite  # Specific layout for bipartite graphs
+  )
+  legend("bottomright", legend = paste("Community", 1:length(unique(comms))),
+         fill = unique(comm_col))
+  # Return the graph object for further analysis if needed
+  return(g)
+}
+
+# Example usage:
+# Create a sample edge matrix (drug-gene connections)
+edge_matrix <- data
+
+# Plot the network
+plot_bipartite_network(edge_matrix, "Drug-Gene Interaction Network")
+```
+
+## Graph 2
+
+
+```{r plot2, fig.width=16, fig.height=16, cache=TRUE}
+library(igraph)
+
+# Function to create and plot a bipartite network from an edge matrix
+plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
+  # Create unique node names
+  drugs <- unique(edge_matrix[,1])
+  genes <- unique(edge_matrix[,2])
+  
+  # Create the graph
+  g <- make_empty_graph(directed = FALSE)
+  
+  # Add all nodes
+  all_nodes <- c(drugs, genes)
+  g <- add_vertices(g, length(all_nodes), name = all_nodes)
+  
+  # Create type attribute for bipartite graph
+  V(g)$type <- c(rep(TRUE, length(drugs)), rep(FALSE, length(genes)))
+  
+  # Add edges
+  for(i in 1:nrow(edge_matrix)) {
+    g <- add_edges(g, 
+                   c(which(V(g)$name == edge_matrix[i,1]), 
+                     which(V(g)$name == edge_matrix[i,2])))
+  }
+  
+  # Set node colors based on type
+  #V(g)$color <- ifelse(V(g)$type, "lightblue", "lightgreen")
+  
+  comms <- cluster_louvain(g)
+  #print(length(unique(comms)))
+  mems <- membership(comms)
+  comm_col <- rainbow(length(unique(comms)))[mems]
+  #print(length(comm_col))
+  # Plot the network
+  
+  plot(g, 
+       vertex.label = V(g)$name,
+       vertex.color = comm_col,
+       vertex.label.cex = 0.1,  # Adjust label size
+       vertex.size = 5,         # Node size
+       vertex.label.color = "black",
+       main = title,
+       layout = layout_as_bipartite  # Specific layout for bipartite graphs
+  )
+  legend("bottomright", legend = paste("Community", 1:length(unique(comms))),
+         fill = unique(comm_col))
+  # Return the graph object for further analysis if needed
+  return(g)
+}
+
+# Example usage:
+# Create a sample edge matrix (drug-gene connections)
+edge_matrix <- data
+
+# Plot the network
+plot_bipartite_network(edge_matrix, "Drug-Gene Interaction Network")
+```
