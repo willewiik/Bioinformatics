@@ -66,7 +66,8 @@ set.seed(12345)
 
 Recreate one of the three analyses that can be found on https://strimmerlab.github.io/software/genenet/index.html. Document and discuss all your steps. In the analyses there is the step where you select the edges to keep. There a particular criterion is chosen for edge inclusion. Vary this criterion and explore how the resulting clusters will differ with the changes. Take one found cluster, identify the elements in it and try to find information on this cluster. Is it related to some known biological phenomena? If you do not find anything, then document your search attempts.
 ```{r data}
-con <- gzfile("ChG-Miner_miner-chem-gene.tsv.gz", "rt")
+con <- gzfile("Lab5/ChG-Miner_miner-chem-gene.tsv.gz", "rt")
+#con <- gzfile("ChG-Miner_miner-chem-gene.tsv.gz", "rt")
 data <- read.table(con, sep = "\t", header = FALSE)
 close(con)
 colnames(data) <- c("Drug","Gene")
@@ -78,7 +79,7 @@ colnames(data) <- c("Drug","Gene")
 library(igraph)
 
 # Function to create and plot a bipartite network from an edge matrix
-plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
+plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network",plot_graph = TRUE, top_n = 9) {
   # Create unique node names
   drugs <- unique(edge_matrix[,1])
   genes <- unique(edge_matrix[,2])
@@ -104,26 +105,43 @@ plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
   #V(g)$color <- ifelse(V(g)$type, "lightblue", "lightgreen")
   
   comms <- cluster_louvain(g)
-  #print(length(unique(comms)))
+  freq_memb <- table(membership(communitys))
+  big_mems <- freq_memb[order(freq_memb,decreasing = T)][1:top_n]
+
+  right_index <- as.vector(as.numeric(names(big_mems)))
   mems <- membership(comms)
-  comm_col <- rainbow(length(unique(comms)))[mems]
-  #print(length(comm_col))
+  comm_col <- rainbow(top_n)[mems]
+  comm_col <- rep("#FFFFFF",length(comm_col))
+
+  topncol <- c("#FF0000", "#FFAA00", "#AAFF00", "#00FF00" ,"#00FFAA",
+               "#00AAFF", "#0000FF" ,"#AA00FF", "#FF00AA")
+
+  for(i in 1:length(right_index)) {
+    comm_col[which(mems == right_index[i])] <- topncol[i]
+  }
+  
+
+
   V(g)$shape <- ifelse(V(g)$type, "circle", "square")
   # Plot the network
-  plot(g, 
-       vertex.label = V(g)$name,
-       vertex.shape = V(g)$shape,
-       vertex.color = comm_col,
-       vertex.label.cex = 0.1,  # Adjust label size
-       vertex.size = 5,         # Node size
-       vertex.label.color = "black",
-       main = title#,
-       #layout = layout_as_bipartite  # Specific layout for bipartite graphs
-  )
-  legend("bottomright", legend = paste("Community", 1:length(unique(comms))),
-         fill = unique(comm_col))
-  # Return the graph object for further analysis if needed
-  return(g)
+  if(plot_graph) {
+    plot(g, 
+         vertex.label = V(g)$name,
+         vertex.shape = V(g)$shape,
+         vertex.color = comm_col,
+         vertex.label.cex = 0.01,  # Adjust label size
+         vertex.size = 5,         # Node size
+         vertex.label.color = "black",
+         main = title#,
+         #layout = layout_as_bipartite  # Specific layout for bipartite graphs
+    )
+    legend("bottomright", legend = paste("Community", right_index),
+           fill = topncol)
+    # Return the graph object for further analysis if needed
+    return(g)
+  } else {
+    return(comms)
+  }
 }
 
 # Example usage:
@@ -141,7 +159,7 @@ plot_bipartite_network(edge_matrix, "Drug-Gene Interaction Network")
 library(igraph)
 
 # Function to create and plot a bipartite network from an edge matrix
-plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
+plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network", top_n = 9) {
   # Create unique node names
   drugs <- unique(edge_matrix[,1])
   genes <- unique(edge_matrix[,2])
@@ -167,10 +185,22 @@ plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
   #V(g)$color <- ifelse(V(g)$type, "lightblue", "lightgreen")
   
   comms <- cluster_louvain(g)
-  #print(length(unique(comms)))
+  freq_memb <- table(membership(communitys))
+  big_mems <- freq_memb[order(freq_memb,decreasing = T)][1:top_n]
+
+  right_index <- as.vector(as.numeric(names(big_mems)))
   mems <- membership(comms)
-  comm_col <- rainbow(length(unique(comms)))[mems]
-  #print(length(comm_col))
+  comm_col <- rainbow(top_n)[mems]
+  comm_col <- rep("#FFFFFF",length(comm_col))
+
+  topncol <- c("#FF0000", "#FFAA00", "#AAFF00", "#00FF00" ,"#00FFAA",
+               "#00AAFF", "#0000FF" ,"#AA00FF", "#FF00AA")
+
+  for(i in 1:length(right_index)) {
+    comm_col[which(mems == right_index[i])] <- topncol[i]
+  }
+  
+
   # Plot the network
   
   plot(g, 
@@ -182,8 +212,8 @@ plot_bipartite_network <- function(edge_matrix, title = "Bipartite Network") {
        main = title,
        layout = layout_as_bipartite  # Specific layout for bipartite graphs
   )
-  legend("bottomright", legend = paste("Community", 1:length(unique(comms))),
-         fill = unique(comm_col))
+  legend("bottomright", legend = paste("Community", right_index),
+           fill = topncol)
   # Return the graph object for further analysis if needed
   return(g)
 }
@@ -194,4 +224,39 @@ edge_matrix <- data
 
 # Plot the network
 plot_bipartite_network(edge_matrix, "Drug-Gene Interaction Network")
+```
+
+
+```{r poop}
+
+communitys <- plot_bipartite_network(edge_matrix, plot_graph = FALSE)
+length(unique(communitys))
+freq_memb <- table(membership(communitys))
+big_mems <- freq_memb[order(freq_memb,decreasing = T)][1:9]
+
+gg <- communitys[as.vector(as.numeric(names(big_mems)))]
+membgg <- membership(gg)
+
+
+
+memb <- membership(communitys)
+go_results_list <- list()
+
+# Loop through each community and perform GO enrichment
+for (i in 1:length(communitys$membership)) {
+  # Get the genes in the current community
+  community_genes <- communitys$names[communitys$membership == i]
+  
+  # Perform GO enrichment analysis for the current community
+  go_results <- enrichGO(
+    gene = community_genes, 
+    OrgDb = org.Hs.eg.db, 
+    keyType = "UNIPROT",  # Use "UNIPROT" or the appropriate gene ID type
+    ont = "BP"  # Change "BP" to "MF" or "CC" if you want other ontologies
+  )
+  
+  # Store the results in the list
+  go_results_list[[i]] <- go_results
+}
+
 ```

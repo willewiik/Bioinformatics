@@ -238,7 +238,12 @@ graph1<-qgraph(adj_matrix, layout="circular", sampleSize = nrow(data_mini),
               vsize=7, cut=0, maximum=.45, border.width=1.5)
 
 
-g2 <- as.undirected(g, mode = "collapse")
+```
+
+```{r,message=FALSE}
+
+
+g2 <- as_undirected(g, mode = "collapse")
 community <- cluster_louvain(g2)
 comm_membership <- membership(community)
 community_colors <- rainbow(length(unique(comm_membership)))[comm_membership]
@@ -248,6 +253,44 @@ plot(g,
      vertex.label = NA,                   # Hide labels for clarity (optional)
      edge.arrow.size = 0.5,               # Adjust edge size
      main = "Community Detection Plot")
+legend("topright", 
+       legend = paste("Community", 1:length(unique(comm_membership))), 
+       fill = rainbow(length(unique(comm_membership))))
+
+
+
+# GGPLOT ################################
+# Load the required libraries
+library(ggraph)
+library(igraph)
+library(tidygraph)
+
+# Convert your igraph object 'g' to a tidygraph object
+g_tidy <- as_tbl_graph(g)
+
+# Apply Louvain community detection
+community <- cluster_louvain(g2)
+
+# Add community membership to the tidygraph object
+g_tidy <- g_tidy %>%
+  mutate(community = membership(community))
+
+# Plot the graph using ggraph with a layout (e.g., 'fr' for Fruchterman-Reingold)
+ggraph(g_tidy, layout = 'fr') +  # Fruchterman-Reingold layout
+  geom_edge_link(alpha = 0.5) +   # Plot edges with some transparency
+  geom_node_point(aes(color = as.factor(community)), size = 3) +  # Color nodes by community
+  scale_color_viridis_d() +  # Use a color scale for communities (viridis is good for large numbers)
+  theme_graph() +           # Use the graph theme from ggraph for a clean look
+  labs(title = "Community Detection Plot using ggraph") +
+  theme(legend.position = "none") 
+
+library(BiocManager)
+library(clusterProfiler)
+# BiocManager::install("org.Hs.eg.db")
+library(org.Hs.eg.db)
+community_genes <- community[[1]]
+go_results <- enrichGO(gene = community_genes, OrgDb = org.Hs.eg.db, keyType = "UNIPROT", ont = "BP")
+go_results
 
 ```
 
