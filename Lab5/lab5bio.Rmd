@@ -65,23 +65,41 @@ set.seed(12345)
 Go to the webpage http://snap.stanford.edu/biodata/ and choose one of the provided datasets. Download it and reproduce the statistics concerning the graph. If you obtain different values, then discuss this in your report. Visualize the graph. The next step is to try to identify some clusters (communities in the graph). You can follow the tutorial at https://psych-networks.com/r-tutorial-identify-communities-items-networks/ to achieve this. Once you have found some clusters, identify the elements in it and try to find information on this cluster. Is it related to some known biological phenomena? If you do not find anything, then document your search attempts. If it will not be possible to do this question on the whole downloaded graph, then you may take some sub-graph of it.
 
 
-```{r, include = FALSE,message=FALSE}
+```{r,message=FALSE}
 
-
+library(qgraph)
 library(igraph)
 library(ape)
-# https://snap.stanford.edu/biodata/datasets/10001/10001-ChCh-Miner.html
-#con <- gzfile("X:/Desktop/Bioinformatics/Lab5/ChCh-Miner_durgbank-chem-chem.tsv.gz", "rt")
-con <- gzfile("X:/Desktop/Bioinformatics/Lab5/SS-Butterfly_weights.tsv.gz", "rt")
-data <- read.table(con, sep = "\t", header = TRUE)
-close(con)
-graph_data <- data.frame(from = data$X0, to = data$X4, weight = data$X0.029663)
-head(data)
 
-con <- gzfile("X:/Desktop/Bioinformatics/Lab5/SS-Butterfly_labels.tsv.gz", "rt")
-data_labels <- read.table(con, sep = "\t", header = TRUE)
+# Test 1
+
+#https://snap.stanford.edu/biodata/datasets/10001/10001-ChCh-Miner.html
+con <- gzfile("X:/Desktop/Bioinformatics/Lab5/ChCh-Miner_durgbank-chem-chem.tsv.gz", "rt")
+data <- read.table(con, sep = "\t", header = FALSE)
+colnames(data) <- c("Drug1","Drug2")
 close(con)
-head(data_labels)
+
+
+# Test 2
+
+# con <- gzfile("X:/Desktop/Bioinformatics/Lab5/SS-Butterfly_weights.tsv.gz", "rt")
+# data <- read.table(con, sep = "\t", header = TRUE)
+# close(con)
+# graph_data <- data.frame(from = data$X0, to = data$X4, weight = data$X0.029663)
+# head(data)
+# 
+# con <- gzfile("X:/Desktop/Bioinformatics/Lab5/SS-Butterfly_labels.tsv.gz", "rt")
+# data_labels <- read.table(con, sep = "\t", header = TRUE)
+# close(con)
+# head(data_labels)
+
+
+# Test 3
+
+con <- gzfile("X:/Desktop/Bioinformatics/Lab5/ChG-Miner_miner-chem-gene.tsv.gz", "rt")
+data <- read.table(con, sep = "\t", header = FALSE)
+close(con)
+colnames(data) <- c("Drug","Gene")
 
 g <- graph_from_data_frame(data, directed = TRUE)
 g
@@ -95,21 +113,28 @@ cat("Number of edges:", ecount(g), "\n")
 ```
 
 
-```{r, include = FALSE,message=FALSE}
-#plot(g, vertex.size=5, vertex.label=NA, edge.width=0.01,vertex.color="coral", main="ChCh-Miner Graph")
+```{r,message=FALSE, fig.w }
+
+# TEST 1
+# plot(g, vertex.size=5, vertex.label=NA, edge.width=0.01,vertex.color="coral", main="ChCh-Miner Graph")
+
+# TEST 2
+# V(g)$label <- as.character(data_labels$X1[match(V(g)$name, data_labels$X0)])
+# plot(g, vertex.size = 10, vertex.label.cex = 0.7,
+#      edge.width = E(g)$weight,
+#      vertex.label = V(g)$label,
+#      main = "Butterfly Similarity Network")
 
 
-V(g)$label <- as.character(data_labels$X1[match(V(g)$name, data_labels$X0)])
-plot(g, vertex.size = 10, vertex.label.cex = 0.7,
-     edge.width = E(g)$weight,
-     vertex.label = V(g)$label,
-     main = "Butterfly Similarity Network")
+# TEST 3
+plot(g, vertex.size=5,vertex.label=NA, edge.width=0.01,vertex.color="coral", main="ChG-Miner_miner-chem-gene Graph")
 
 ```
 
 
 
-```{r, include = FALSE,message=FALSE}
+```{r,message=FALSE}
+#  TEST 1
 
 # library(qgraph)
 # 
@@ -137,28 +162,48 @@ plot(g, vertex.size = 10, vertex.label.cex = 0.7,
 
 ```
 
-```{r, include = FALSE,message=FALSE}
+```{r,message=FALSE}
+# TEST 2
+# butterfly_ids <- unique(c(as.character(data$X0), as.character(data$X4)))
+# 
+# # Create an empty adjacency matrix initialized to 0
+# adj_matrix <- matrix(0, nrow = length(butterfly_ids), ncol = length(butterfly_ids))
+# rownames(adj_matrix) <- colnames(adj_matrix) <- butterfly_ids
+# 
+# # Fill the adjacency matrix with similarity scores
+# for (i in 1:nrow(data)) {
+#   adj_matrix[as.character(data$X0[i]), as.character(data$X4[i])] <- data$X0.029663[i]
+#   adj_matrix[as.character(data$X4[i]), as.character(data$X0[i])] <- data$X0.029663[i]  # Symmetric matrix
+# }
+# 
+# cor_matrix <- cor(adj_matrix)
+# qgraph(cor_matrix, layout="spring", sampleSize = nrow(data),
+#               vsize=7, cut=0, maximum=.45, border.width=1.5)
 
-butterfly_ids <- unique(c(as.character(data$X0), as.character(data$X4)))
+```
 
-# Create an empty adjacency matrix initialized to 0
-adj_matrix <- matrix(0, nrow = length(butterfly_ids), ncol = length(butterfly_ids))
-rownames(adj_matrix) <- colnames(adj_matrix) <- butterfly_ids
-
-# Fill the adjacency matrix with similarity scores
-for (i in 1:nrow(data)) {
-  adj_matrix[as.character(data$X0[i]), as.character(data$X4[i])] <- data$X0.029663[i]
-  adj_matrix[as.character(data$X4[i]), as.character(data$X0[i])] <- data$X0.029663[i]  # Symmetric matrix
-}
-
-cor_matrix <- cor(adj_matrix)
-qgraph(cor_matrix, layout="spring", sampleSize = nrow(data),
-              vsize=7, cut=0, maximum=.45, border.width=1.5)
+```{r,message=FALSE}
+# TEST 3
+# butterfly_ids <- unique(c(as.character(data$X0), as.character(data$X4)))
+# 
+# # Create an empty adjacency matrix initialized to 0
+# adj_matrix <- matrix(0, nrow = length(butterfly_ids), ncol = length(butterfly_ids))
+# rownames(adj_matrix) <- colnames(adj_matrix) <- butterfly_ids
+# 
+# # Fill the adjacency matrix with similarity scores
+# for (i in 1:nrow(data)) {
+#   adj_matrix[as.character(data$X0[i]), as.character(data$X4[i])] <- data$X0.029663[i]
+#   adj_matrix[as.character(data$X4[i]), as.character(data$X0[i])] <- data$X0.029663[i]  # Symmetric matrix
+# }
+# 
+# cor_matrix <- cor(adj_matrix)
+# qgraph(cor_matrix, layout="spring", sampleSize = nrow(data),
+#               vsize=7, cut=0, maximum=.45, border.width=1.5)
 
 ```
 
 
-```{r, include = FALSE,message=FALSE}
+```{r,message=FALSE}
 
 
 # Community detection using Walktrap method
@@ -166,6 +211,43 @@ community_walktrap <- cluster_walktrap(g)
 
 # Visualize the communities (coloring nodes by their community)
 plot(community_walktrap, g, vertex.size=5, vertex.label=NA, main="Walktrap Community Detection")
+
+
+devtools::install_github('hfgolino/EGA')
+library(EGAnet)
+
+
+data_mini <- data[1:1000,]
+
+# TEST 3
+unique_nodes <- unique(c(as.character(data_mini$Drug), as.character(data_mini$Gene)))
+
+# Create an empty adjacency matrix initialized to 0
+adj_matrix <- matrix(0, nrow = length(ids), ncol = length(ids))
+rownames(adj_matrix) <- colnames(adj_matrix) <- ids
+
+# Fill the adjacency matrix with similarity scores
+for (i in 1:nrow(data_mini)) {
+  adj_matrix[as.character(data_mini$Drug[i]), as.character(data_mini$Gene[i])] <- 1
+  adj_matrix[as.character(data_mini$Gene[i]), as.character(data_mini$Drug[i])] <- 1
+}
+
+cov(data_mini)
+cormatrix <- cor_auto(data)
+graph1<-qgraph(adj_matrix, layout="circular", sampleSize = nrow(data_mini),
+              vsize=7, cut=0, maximum=.45, border.width=1.5)
+
+
+g2 <- as.undirected(g, mode = "collapse")
+community <- cluster_louvain(g2)
+comm_membership <- membership(community)
+community_colors <- rainbow(length(unique(comm_membership)))[comm_membership]
+plot(g, 
+     vertex.size = 5,                    # Adjust vertex size for better visibility
+     vertex.color = community_colors,     # Color nodes by their community
+     vertex.label = NA,                   # Hide labels for clarity (optional)
+     edge.arrow.size = 0.5,               # Adjust edge size
+     main = "Community Detection Plot")
 
 ```
 
